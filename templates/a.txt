@@ -1,0 +1,2 @@
+Distinct will have to finalize first the prototype in figma before implementing into vscode.
+It will be done before next Sunday depending on the conflict at class schedules.
