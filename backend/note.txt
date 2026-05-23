@@ -1,2 +1,3 @@
 This is for PHP and MySql connected to xampp. Wait for frontend to finalize first before doing backend.
-Frontend will handle by Distinct and backend by yomii-dev.
+Frontend will handle by Distinct and backend by yomii-dev and t9kwa. 
+For other collaborators, you can help us by suggesting some improvement to the system.
