@@ -1,0 +1,2 @@
+This is for PHP and MySql connected to xampp. Wait for frontend to finalize first before doing backend.
+Frontend will handle by Distinct and backend by yomii-dev.
