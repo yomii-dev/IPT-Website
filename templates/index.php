@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>P3R | Product</title>
+    <title>P3R | Home</title>
 </head>
 
 <body class="bg-[#121316] text-white min-h-screen flex flex-col justify-between font-sans">
@@ -20,8 +20,8 @@
             </div>
 
             <div class="flex items-center gap-2">
-                <a href="index.php" class="bg-[#262930] text-gray-300 font-medium px-4 py-1.5 rounded-lg text-xs hover:bg-gray-700">Home</a>
-                <a href="product.php" class="bg-[#D9D9D9] text-black font-medium px-4 py-1.5 rounded-lg text-xs">Product</a>
+                <a href="index.php" class="bg-[#D9D9D9] text-black font-medium px-4 py-1.5 rounded-lg text-xs">Home</a>
+                <a href="product.php" class="bg-[#262930] text-gray-300 font-medium px-4 py-1.5 rounded-lg text-xs hover:bg-gray-700">Product</a>
                 <a href="service.php" class="bg-[#262930] text-gray-300 font-medium px-4 py-1.5 rounded-lg text-xs hover:bg-gray-700">Service</a>
             </div>
 
@@ -33,6 +33,7 @@
         </nav>
     </div>
 
+   
 </body>
 
 </html>
