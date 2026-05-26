@@ -35,12 +35,12 @@
         </nav>
     </div>
 
+    <!--MAIN CONTAINER-->
     <main class="w-full max-w-7xl mx-auto px-6 space-y-12 mb-16">
 
         <div class="relative rounded-xl overflow-hidden h-[380px] md:h-[420px]">
 
             <img src="/IPT-Website/assets/service_bg_card.jpg" alt="BG Card from top view" class="absolute inset-0 w-full h-full object-cover object-center brightness-[0.3]">
-
   
             <div class="relative h-full flex flex-col justify-center px-10 md:px-16 max-w-xl space-y-4">
                 <h1 class="text-4xl md:text-[44px] font-black">
