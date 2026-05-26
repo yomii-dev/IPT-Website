@@ -1,3 +1,4 @@
+<!--SIGNUP PAGE-->
 <!DOCTYPE html>
 
 <html lang="en">
@@ -19,7 +20,7 @@
                 <img src="/IPT-Website/assets/logo.svg" alt="P3R Logo" class="h-5">
             </div>
 
-            <div class="flex items-center gap-2">
+            <div class="flex items-center ml-13 gap-2">
                 <a href="#" class="bg-[#D9D9D9] text-black font-medium px-4 py-1.5 rounded-lg text-xs">Home</a>
                 <a href="#" class="bg-[#262930] text-gray-300 font-medium px-4 py-1.5 rounded-lg text-xs hover:bg-gray-700">Product</a>
                 <a href="#" class="bg-[#262930] text-gray-300 font-medium px-4 py-1.5 rounded-lg text-xs hover:bg-gray-700">Service</a>
@@ -68,6 +69,7 @@
                     <button type="submit" class="w-full bg-[#D9D9D9] text-black font-bold text-sm py-2.5 rounded-lg hover:bg-gray-200 transition">
                         Signup
                     </button>
+
                 </form>
                 
                 <p class="text-center text-xs text-gray-500 mt-6">
