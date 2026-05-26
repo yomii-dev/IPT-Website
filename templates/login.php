@@ -35,6 +35,8 @@
     </div>
 
     <!--MAIN CONTAINER-->
+
+    <!--In this part, eto yung unang page ng P3R bago magdirect sa homepage to verify user first-->
     <main class="flex-grow flex items-center justify-center px-6 pb-12">
 
         <div class="bg-[#252A2E] rounded-xl p-6 w-full max-w-4xl flex gap-8 items-center">
@@ -54,7 +56,7 @@
                     Sign in to view your dream PC parts or rent PCs of your choice at [P3R] Part Picker PC Rental.
                 </p>
                 
-                <!--This is where the data input by user match to the save user-data in database, if not create new one-->
+                <!--This is where the data input by user matches to the save user-data in database, if not create new one-->
                 <form action="put_something" method="POST" class="space-y-4">
 
                     <input type="email" name="email" placeholder="Email" required
