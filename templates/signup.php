@@ -52,6 +52,7 @@
                     Discover your dream PC at [P3R] Part Picker PC Rental.
                 </p>
                 
+                <!--Add a php and link to xampp mysql here for linking user's input data to database online-->
                 <form action="put_something_here" method="POST" class="space-y-4">
                     
                     <div class="flex gap-3">

@@ -54,6 +54,7 @@
                     Sign in to view your dream PC parts or rent PCs of your choice at [P3R] Part Picker PC Rental.
                 </p>
                 
+                <!--This is where the data input by user match to the save user-data in database, if not create new one-->
                 <form action="put_something" method="POST" class="space-y-4">
 
                     <input type="email" name="email" placeholder="Email" required
@@ -63,7 +64,7 @@
                     
                     <button type="submit" class="w-full bg-[#D9D9D9] text-black font-bold text-sm py-2.5 rounded-lg hover:bg-gray-200 transition">
                         Login
-                    </button>
+                    </button> <!--If login clicks, it should show user name at profile icon in homepage, no need a profile pic-->
                     
                 </form>
                 
