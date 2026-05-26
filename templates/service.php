@@ -12,7 +12,8 @@
 </head>
 
 <body class="bg-[#121316] text-white min-h-screen flex flex-col justify-between font-sans">
-        <!--NAVBAR LAYOUT-->
+    
+    <!--NAVBAR LAYOUT-->
     <div class="p-4">
         <nav class="bg-[#252A2E] rounded-xl px-6 py-3 flex items-center justify-between">
             
@@ -26,6 +27,7 @@
                 <a href="service.php" class="bg-[#D9D9D9] text-black font-medium px-4 py-1.5 rounded-lg text-xs">Service</a>
             </div>
 
+            <!--In this part, dapat lalabas yung logout tas didirect siya sa login page-->
             <div class="flex items-center pr-2">
                 <img src="/IPT-Website/assets/user_profile.svg" alt="Your Profile" class="h-7 w-auto select-none">
             </div>
@@ -33,7 +35,65 @@
         </nav>
     </div>
 
-        <!--FOOTER LAYOUT-->
+    <main class="w-full max-w-7xl mx-auto px-6 space-y-12 mb-16">
+
+        <div class="relative rounded-xl overflow-hidden h-[380px] md:h-[420px]">
+
+            <img src="/IPT-Website/assets/service_bg_card.jpg" alt="BG Card from top view" class="absolute inset-0 w-full h-full object-cover object-center brightness-[0.3]">
+
+  
+            <div class="relative h-full flex flex-col justify-center px-10 md:px-16 max-w-xl space-y-4">
+                <h1 class="text-4xl md:text-[44px] font-black">
+                    Lorem ipsum dolor<br>sit amet?
+                </h1>
+                <p class="text-xs md:text-[16px] text-gray-400">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="pt-2">
+            <h2 class="text-2xl md:text-3xl font-black text-white">
+                Featured Rental Dream PCs
+            </h2>
+        </div>
+
+        <!--Add the backend here, yung katulad nung pinakita satin ni sir na sa admin side ito maeedit
+            imbes na dito mo ieedit, you can remove this or change anything here-->
+        <div class="space-y-6">
+            
+            <div class="bg-[#252A2E] rounded-xl p-6 flex flex-col md:flex-row gap-8 items-center">
+
+                <div class="w-full md:w-[320px] shrink-0 aspect-square rounded-xl overflow-hidden shadow-inner">
+                    <img src="/IPT-Website/assets/samplepic.jpg" alt="Dream PC Setup" class="w-full h-full object-cover">
+                </div>
+
+                <div class="flex-grow space-y-3 w-full pl-14">
+
+                    <h3 class="text-3xl font-black text-white">Lorem ipsum dolor sit amet</h3>
+
+                    <ul class="text-[16px] text-gray-400 space-y-1.5 list-disc list-inside">
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>consectetur adipiscing elit sed do</li>
+                        <li>eiusmod tempor incididunt ut labore</li>
+                        <li>et dolore magna aliqua.</li>
+                        <li>Ut enim ad minim veniam, quis nostrud</li>
+                        <li>exercitation ullamco laboris</li>
+                        <li>nisi ut aliquip ex ea commodo consequat</li>
+                    </ul>
+                    <button class="bg-gray-200 text-black font-bold text-[14px] px-6 py-2 rounded-lg hover:bg-white shadow-sm">
+                        Rent
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!--Hanggang dito lang may backend, di kasali footer-->
+
+    <!--FOOTER LAYOUT-->
     <footer class="bg-[#050608] w-full pt-16 pb-6 px-8 md:px-16 text-[13px] text-gray-400 font-normal">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
             
@@ -117,7 +177,7 @@
         </div>
 
     </footer>
-    
+
 </body>
 
 </html>
