@@ -1,3 +1,5 @@
+<!--SERVICE PAGE-->
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -24,9 +26,8 @@
                 <a href="service.php" class="bg-[#D9D9D9] text-black font-medium px-4 py-1.5 rounded-lg text-xs">Service</a>
             </div>
 
-            <div class="flex items-center gap-4 text-xs font-medium text-gray-400">
-                <a href="login.php" class="text-white">Login</a>
-                <a href="signup.php" class="hover:text-white">Sign Up</a>
+            <div class="flex items-center pr-2">
+                <img src="/IPT-Website/assets/user_profile.svg" alt="Your Profile" class="h-7 w-auto select-none">
             </div>
 
         </nav>
