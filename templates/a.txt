@@ -1,2 +1,45 @@
-Distinct will have to finalize first the prototype in figma before implementing into vscode.
-It will be done before next Sunday depending on the conflict at class schedules.
+Things to do: (Implementation of backend)
+
+# Add php with mysql to everything.
+
+1. Link the php to xampp (mysql) - Kayo na bahala kung anong name, table etc. basta konting fields lang.
+
+2. Link sign up to xampp to save user's data to xampp and when the user login, the account should match to the database
+and when it matches to the login form that user typed there, he will direct to homepage (index.php)
+
+3. Without creating account, user can't access P3R website where navbar (home, product, service) is inaccessible.
+
+4. On product page, add backend to the filter card as well as the backend linked to admin side for adding and removing products.
+For filter, make 'clear all' works as well as checkboxes to match what pc part the user looking for.
+
+5. On service page, similar to product page except filter card, add backend that linked to admin side for adding and removing pc rent.
+
+6. For backend, dapat hindi pwede yung magrerent ka ng pc set at the same time bibili ng pc parts.
+Dapat kung rent ng pc sets dun lang, same thing to pc parts.
+Also, if the user click the add to card and rent button, dapat magsasave siya sa database.
+
+7. If user done touring P3R, when user click profile icon, logout button will pop out. (Apply in Home, Product and Service Page)
+When user click logout, it will direct to login, hence, the navbar links will disable.`
+
+
+For Admin Side:
+
+1. Dapat hiwalay ang customization ng product page at service page.
+It means kapag may binago ka sa product page, ang maapektuhan lang dun is yung product page not service page and vice versa.
+
+# For no 2 and 3, isipin nyo na lang yung pagpindot ng windows 11 appearance sa settings, marami ka pwedeng icustomize dun na 
+isang pindot lang such as wallpaper change, dark mode etc. kaysa manual code mo siya gagawin just like me in HyDE EOS which is hassle.
+
+2. For products, add the name/model, prices and add cart button. (customization in product card)
+
+3. For rental pc, add the pc set name, description, specs, rental prices and duration. (customization in service card)
+
+4. Add the save button to save changes, edit to change something and remove to remove that card. 
+You can also add icon here beside button.
+
+5. Much better, gawin nyong table toh para organize tingnan.
+
+6. For frontend, kayo na bahala since di naman required sa admin ang magandang UI as long as madali mo siya magagamit.
+
+# Make it simple as much as possible and less code.
+# If medyo malabo gagawin sa backend, check nyo yung code ni sir sa gdrive and his personal files.
