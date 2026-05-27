@@ -42,19 +42,20 @@
 
             <img src="/IPT-Website/assets/service_bg_card.jpg" alt="BG Card from top view" class="absolute inset-0 w-full h-full object-cover object-center brightness-[0.3]">
   
-            <div class="relative h-full flex flex-col justify-center px-10 md:px-16 max-w-xl space-y-4">
+            <div class="relative h-full flex flex-col justify-center px-10 px-16 max-w-xl space-y-4">
                 <h1 class="text-4xl md:text-[44px] font-black">
-                    Lorem ipsum dolor<br>sit amet?
+                    Looking for PC<br>to rent?
                 </h1>
-                <p class="text-xs md:text-[16px] text-gray-400">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                </p>
+                <p class="text-[16px] text-gray-400">
+                    Browse our curated collection of elite gaming rigs and high-performance workstations. 
+                    Choose the exact specs you need, select a flexible rental timeline that fits your project, 
+                    and deploy your dream setup instantly without the heavy upfront purchase cost.
             </div>
 
         </div>
 
         <div class="pt-2">
-            <h2 class="text-2xl md:text-3xl font-black text-white">
+            <h2 class="text-2xl text-3xl font-black text-white">
                 Featured Rental Dream PCs
             </h2>
         </div>
@@ -63,9 +64,9 @@
             imbes na dito mo ieedit, you can remove this or change anything here-->
         <div class="space-y-6">
             
-            <div class="bg-[#252A2E] rounded-xl p-6 flex flex-col md:flex-row gap-8 items-center">
+            <div class="bg-[#252A2E] rounded-xl p-6 flex flex-col flex-row gap-8 items-center">
 
-                <div class="w-full md:w-[320px] shrink-0 aspect-square rounded-xl overflow-hidden shadow-inner">
+                <div class="w-full md:w-[320px] shrink-0 aspect-square rounded-xl overflow-hidden">
                     <img src="/IPT-Website/assets/samplepic.jpg" alt="Dream PC Setup" class="w-full h-full object-cover">
                 </div>
 
@@ -134,9 +135,9 @@
                 <div class="space-y-4 min-w-[100px]">
                     <h4 class="text-white font-bold text-[14px]">Quick links</h4>
                     <ol class="space-y-3 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition">Home</a></li>
-                        <li><a href="#" class="hover:text-white transition">Product</a></li>
-                        <li><a href="#" class="hover:text-white transition">Service</a></li>
+                        <li><a href="index.php" class="hover:text-white transition">Home</a></li>
+                        <li><a href="product.php" class="hover:text-white transition">Product</a></li>
+                        <li><a href="service.php" class="hover:text-white transition">Service</a></li>
                     </ol>
                 </div>
 
