@@ -27,6 +27,7 @@
                 <a href="service.php" class="bg-[#262930] text-gray-300 font-medium px-4 py-1.5 rounded-lg text-xs hover:bg-gray-700">Service</a>
             </div>
 
+            <!--In this part, dapat lalabas yung logout tas didirect siya sa login page kapag nag-logout-->
             <div class="flex items-center pr-2">
                 <img src="/IPT-Website/assets/user_profile.svg" alt="Your Profile" class="h-7 w-auto select-none">
             </div>
@@ -34,7 +35,9 @@
         </nav>
     </div>
 
-        <!--FOOTER LAYOUT-->
+    <!--Hanggang dito lang may backend, di kasali footer-->
+
+    <!--FOOTER LAYOUT-->
     <footer class="bg-[#050608] w-full pt-16 pb-6 px-8 md:px-16 text-[13px] text-gray-400 font-normal">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
             
@@ -75,9 +78,9 @@
                 <div class="space-y-4 min-w-[100px]">
                     <h4 class="text-white font-bold text-[14px]">Quick links</h4>
                     <ol class="space-y-3 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition">Home</a></li>
-                        <li><a href="#" class="hover:text-white transition">Product</a></li>
-                        <li><a href="#" class="hover:text-white transition">Service</a></li>
+                        <li><a href="index.php" class="hover:text-white transition">Home</a></li>
+                        <li><a href="product.php" class="hover:text-white transition">Product</a></li>
+                        <li><a href="service.php" class="hover:text-white transition">Service</a></li>
                     </ol>
                 </div>
 
@@ -118,7 +121,7 @@
         </div>
 
     </footer>
-    
+
 </body>
 
 </html>
