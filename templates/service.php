@@ -135,18 +135,18 @@
                 <div class="space-y-4 min-w-[100px]">
                     <h4 class="text-white font-bold text-[14px]">Quick links</h4>
                     <ol class="space-y-3 text-gray-400">
-                        <li><a href="index.php" class="hover:text-white transition">Home</a></li>
-                        <li><a href="product.php" class="hover:text-white transition">Product</a></li>
-                        <li><a href="service.php" class="hover:text-white transition">Service</a></li>
+                        <li><a href="index.php" class="hover:text-white">Home</a></li>
+                        <li><a href="product.php" class="hover:text-white">Product</a></li>
+                        <li><a href="service.php" class="hover:text-white">Service</a></li>
                     </ol>
                 </div>
 
                 <div class="space-y-4 min-w-[100px]">
                     <h4 class="text-white font-bold text-[14px]">Platform</h4>
                     <ol class="space-y-3 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition">Facebook</a></li>
-                        <li><a href="#" class="hover:text-white transition">LinkedIn</a></li>
-                        <li><a href="#" class="hover:text-white transition">Github</a></li>
+                        <li><a href="#" class="hover:text-white">Facebook</a></li>
+                        <li><a href="#" class="hover:text-white">LinkedIn</a></li>
+                        <li><a href="#" class="hover:text-white">Github</a></li>
                     </ol>
                 </div>
 
@@ -155,9 +155,9 @@
                     <div class="space-y-4">
                         <h4 class="text-white font-bold text-[14px]">Legal</h4>
                         <ol class="space-y-3 text-gray-400">
-                            <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
-                            <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
-                            <li><a href="#" class="hover:text-white transition">Cookie Policy</a></li>
+                            <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+                            <li><a href="#" class="hover:text-white">Terms of Service</a></li>
+                            <li><a href="#" class="hover:text-white">Cookie Policy</a></li>
                         </ol>
                     </div>
 
