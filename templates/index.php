@@ -134,6 +134,8 @@
         </div>
 
     </main>
+
+    <!--Hanggang dito lang may backend, di kasali footer-->
    
     <!--FOOTER LAYOUT-->
     <footer class="bg-[#050608] w-full pt-16 pb-6 px-8 md:px-16 text-[13px] text-gray-400 font-normal">
