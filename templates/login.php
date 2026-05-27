@@ -49,7 +49,7 @@
             <div class="w-full md:w-1/2 px-4">
 
                 <h1 class="text-2xl font-black tracking-tight mb-2 flex items-center gap-2 flex-wrap">
-                    Welcome to <img src="/IPT-Website/assets/logo.svg" alt="P3R" class="h-4.5 inline-block">
+                    Welcome to <img src="/IPT-Website/assets/logo.svg" alt="P3R Logo" class="h-4.5 inline-block">
                 </h1>
                 
                 <p class="text-xs text-gray-400 mb-6">
