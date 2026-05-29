@@ -1,7 +1,7 @@
 <!--SERVICE PAGE-->
-
-<!DOCTYPE html>
 <?php $page = 'Service'; ?>
+<!DOCTYPE html>
+
 <html lang="en">
 
 <head>
