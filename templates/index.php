@@ -1,4 +1,5 @@
 <!--HOME PAGE-->
+<?php $page = 'Home'; ?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -13,26 +14,9 @@
 <body class="bg-[#121316] text-white min-h-screen flex flex-col justify-between font-sans">
 
     <!--NAVBAR LAYOUT-->
-    <div class="p-4">
-        <nav class="bg-[#252A2E] rounded-xl px-6 py-3 flex items-center justify-between">
-            
-            <div class="flex items-center">
-                <img src="/IPT-Website/assets/logo.svg" alt="P3R Logo" class="h-5">
-            </div>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] .
+        '/IPT-Website/includes/navbar.php'; ?>
 
-            <div class="flex items-center gap-2">
-                <a href="index.php" class="bg-[#D9D9D9] text-black font-medium px-4 py-1.5 rounded-lg text-xs">Home</a>
-                <a href="product.php" class="bg-[#262930] text-gray-300 font-medium px-4 py-1.5 rounded-lg text-xs hover:bg-gray-700">Product</a>
-                <a href="service.php" class="bg-[#262930] text-gray-300 font-medium px-4 py-1.5 rounded-lg text-xs hover:bg-gray-700">Service</a>
-            </div>
-            <!--In this part, dapat lalabas yung logout tas didirect siya sa login page-->
-            <div class="flex items-center pr-2">
-                <img src="/IPT-Website/assets/user_profile.svg" alt="Your Profile" class="h-7 w-auto select-none">
-            </div>
-
-        </nav>
-    </div>
-    
     <!--MAIN CONTAINER-->
     <main class="w-full max-w-7xl mx-auto px-6 py-8 space-y-12 mb-10">
 
@@ -49,22 +33,22 @@
                 </p>
 
                 <div class="flex flex-wrap gap-4 pt-2">
-                    <a href="product.php" class="bg-transparent text-white border border-gray-700 font-bold text-[14px] 
+                    <a href="product.php" class="bg-transparent text-white border border-gray-700 font-bold text-[14px]
                     px-6 py-2 rounded-lg text-gray-300 hover:text-white hover:border-white">
                         Shop Now
                     </a>
-                    <a href="#" class="bg-transparent text-white border border-gray-700 font-bold text-[14px] 
+                    <a href="#" class="bg-transparent text-white border border-gray-700 font-bold text-[14px]
                     px-6 py-2 rounded-lg text-gray-300 hover:text-white hover:border-white">
                         Learn more
                     </a>
                 </div>
-                
+
             </div>
         </div>
 
         <div class="space-y-6">
             <div class="bg-[#252A2E] flex-row rounded-xl p-6 flex flex-col gap-8 items-center">
-                
+
                 <div class="w-[320px] shrink-0 aspect-square rounded-xl overflow-hidden">
                     <img src="/IPT-Website/assets/samplepic.jpg" alt="What P3R offers picture" class="w-full h-full object-cover">
                 </div>
@@ -72,8 +56,8 @@
                 <div class="flex-grow space-y-3 w-full pl-14 text-center text-left">
                     <h2 class="text-3xl font-black text-white">What does P3R offer?</h2>
                     <p class="text-xs text-[18px] text-gray-400">
-                        P3R lets consumers buy PCs / PC parts and rent PCs based on their needs and preferences for work, 
-                        gaming, or creative tasks. It helps users choose components, build their preferred setup, and access 
+                        P3R lets consumers buy PCs / PC parts and rent PCs based on their needs and preferences for work,
+                        gaming, or creative tasks. It helps users choose components, build their preferred setup, and access
                         performant computers without full purchase cost.
                     </p>
                 </div>
@@ -136,11 +120,11 @@
     </main>
 
     <!--Hanggang dito lang may backend, di kasali footer-->
-   
+
     <!--FOOTER LAYOUT-->
     <footer class="bg-[#050608] w-full pt-16 pb-6 px-8 md:px-16 text-[13px] text-gray-400 font-normal">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
-            
+
             <div class="space-y-6 max-w-sm">
 
                 <div class="space-y-2">
@@ -150,7 +134,7 @@
                         A Rental Shop Platform
                     </p>
                 </div>
-                
+
                 <p class="text-gray-400 text-[12px]">
                     74 Malvar Street Barangay<br>
                     Poblacion IV, Santo Tomas City,<br>
@@ -204,8 +188,8 @@
                         </ol>
                     </div>
 
-                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" 
-                            class="border border-gray-700 bg-transparent text-gray-300 hover:text-white hover:border-white 
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+                            class="border border-gray-700 bg-transparent text-gray-300 hover:text-white hover:border-white
                             px-5 py-2.5 rounded-lg text-[13px] font-medium mt-12">
                         Back to top
                     </button>
@@ -213,7 +197,7 @@
                 </div>
 
             </div>
-            
+
         </div>
 
         <div class="w-full text-center text-[12px] text-gray-400 mt-4">
