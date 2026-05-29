@@ -4,7 +4,7 @@
 <!--NAVBAR LAYOUT-->
 <?php
 $highlighted = 'bg-[#D9D9D9] text-black';
-$unhighlighted = 'bg-[#262930] text-gray-300 ';
+$unhighlighted = 'bg-[#262930] text-gray-300 hover:bg-gray-700';
 ?>
 <div class="p-4">
     <nav class="bg-[#252A2E] rounded-xl px-6 py-3 flex items-center justify-between">
@@ -19,10 +19,10 @@ $unhighlighted = 'bg-[#262930] text-gray-300 ';
                 text-black font-medium px-4 py-1.5 rounded-lg text-xs">Home</a>
             <a href="product.php"
                 class="<?= $page == 'Products' ? $highlighted : $unhighlighted ?>
-                font-medium px-4 py-1.5 rounded-lg text-xs hover:bg-gray-700">Products</a>
+                font-medium px-4 py-1.5 rounded-lg text-xs">Products</a>
             <a href="service.php"
                 class="<?= $page == 'Service' ? $highlighted : $unhighlighted ?>
-                font-medium px-4 py-1.5 rounded-lg text-xs hover:bg-gray-700">Service</a>
+                font-medium px-4 py-1.5 rounded-lg text-xs">Service</a>
         </div>
         <!--Chore: In this part, dapat lalabas yung logout tas didirect siya sa login page-->
         <div class="flex items-center pr-2">
