@@ -14,13 +14,13 @@ $unhighlighted = 'bg-[#262930] text-gray-300 hover:bg-gray-700';
         </div>
 
         <div class="flex items-center gap-2">
-            <a href="index.php"
+            <a href="/IPT-Website/templates/index.php"
                 class="<?= $page == 'Home' ? $highlighted : $unhighlighted ?>
                 text-black font-medium px-4 py-1.5 rounded-lg text-xs">Home</a>
-            <a href="product.php"
+            <a href="/IPT-Website/templates/product.php"
                 class="<?= $page == 'Products' ? $highlighted : $unhighlighted ?>
                 font-medium px-4 py-1.5 rounded-lg text-xs">Products</a>
-            <a href="service.php"
+            <a href="/IPT-Website/templates/service.php"
                 class="<?= $page == 'Service' ? $highlighted : $unhighlighted ?>
                 font-medium px-4 py-1.5 rounded-lg text-xs">Service</a>
         </div>
