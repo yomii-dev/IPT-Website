@@ -1,5 +1,16 @@
 <!--PRODUCT PAGE-->
-<?php $page = 'Products'; ?>
+<?php
+$page = 'Products';
+
+try {
+    $conn = require_once '../includes/mysqli.inc.php';
+    $query = 'SELECT * FROM ProductsInfo';
+
+    $result = $conn->query($query);
+} catch (mysqli_sql_exception $e) {
+    die("SQL Error: $e");
+}
+?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -37,7 +48,7 @@
         <div class="flex flex-col lg:flex-row gap-8 items-start w-full">
 
             <!--FILTER SIDEBAR CONTAINER-->
-            <div class="w-full lg:w-[280px] shrink-0 bg-[#252A2E] border border-gray-800/60 rounded-xl p-6 space-y-6 text-white">
+            <div class="w-full lg:w-[280px] shrink-0 bg-[#252A2E] border border-gray-800/60 rounded-xl p-6 space-y-6 text-white sticky top-4">
 
                 <div class="flex items-center justify-between">
                     <h2 class="text-lg font-bold tracking-wide text-gray-300">FILTER</h2>
@@ -126,26 +137,26 @@
                 <!--Here, similar din sa service php but I added 4 column instead of 1. Again, sa admin side maeedit
                     para hindi na sa code nito mageedit just like what sir revealed to us last 3 weeks ago.-->
 
-                <div class="bg-[#252A2E] rounded-xl aspect-[3/4] w-full"></div>
-                <div class="bg-[#252A2E] rounded-xl aspect-[3/4] w-full"></div>
-                <div class="bg-[#252A2E] rounded-xl aspect-[3/4] w-full"></div>
-                <div class="bg-[#252A2E] rounded-xl aspect-[3/4] w-full"></div>
+                <?php if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $name = htmlspecialchars($row['Product_Name']);
+                        $desc = htmlspecialchars($row['Product_Desc']);
+                        $category = htmlspecialchars($row['Product_Category']);
+                        $price = htmlspecialchars($row['Product_Price']);
+                        $stock = htmlspecialchars($row['InStock']);
+                        $image = '../assets/' . htmlspecialchars($row['Image']);
 
-                <div class="bg-[#252A2E] rounded-xl aspect-[3/4] w-full"></div>
-                <div class="bg-[#252A2E] rounded-xl aspect-[3/4] w-full"></div>
-                <div class="bg-[#252A2E] rounded-xl aspect-[3/4] w-full"></div>
-                <div class="bg-[#252A2E] rounded-xl aspect-[3/4] w-full"></div>
-
-                <div class="bg-[#252A2E] rounded-xl aspect-[3/4] w-full"></div>
-                <div class="bg-[#252A2E] rounded-xl aspect-[3/4] w-full"></div>
-                <div class="bg-[#252A2E] rounded-xl aspect-[3/4] w-full"></div>
-                <div class="bg-[#252A2E] rounded-xl aspect-[3/4] w-full"></div>
-
-                <div class="bg-[#252A2E] rounded-xl aspect-[3/4] w-full"></div>
-                <div class="bg-[#252A2E] rounded-xl aspect-[3/4] w-full"></div>
-                <div class="bg-[#252A2E] rounded-xl aspect-[3/4] w-full"></div>
-                <div class="bg-[#252A2E] rounded-xl aspect-[3/4] w-full"></div>
-
+                        echo '<div class="bg-[#252A2E] rounded-xl aspect-[3/4] w-full p-4">';
+                        echo "<img class=\"aspect-square\" src=\"$image\" alt=\"$name\">";
+                        echo $name . '<br>';
+                        echo $desc . '<br>';
+                        echo "₱$price" . '<br>';
+                        echo "Qty: $stock";
+                        echo '</div>';
+                    }
+                } else {
+                    echo '0 results';
+                } ?>
             </div>
 
         </div>

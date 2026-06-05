@@ -24,7 +24,7 @@
 
             <img src="/IPT-Website/assets/home_bg_card.jpg" alt="BG Image" class="absolute inset-0 w-full h-full object-cover object-center brightness-[0.3]">
 
-            <div class="relative h-full flex flex-col justify-center px-10 px-16 max-w-2xl space-y-4">
+            <div class="relative h-full flex flex-col justify-center px-16 max-w-2xl space-y-4">
                 <h1 class="text-4xl text-[44px] font-black text-white">
                     Your ultimate setup, piece<br>by piece, on your terms.
                 </h1>
@@ -33,11 +33,11 @@
                 </p>
 
                 <div class="flex flex-wrap gap-4 pt-2">
-                    <a href="product.php" class="bg-transparent text-white border border-gray-700 font-bold text-[14px]
+                    <a href="product.php" class="bg-transparent border border-gray-700 font-bold text-[14px]
                     px-6 py-2 rounded-lg text-gray-300 hover:text-white hover:border-white">
                         Shop Now
                     </a>
-                    <a href="#" class="bg-transparent text-white border border-gray-700 font-bold text-[14px]
+                    <a href="#" class="bg-transparent border border-gray-700 font-bold text-[14px]
                     px-6 py-2 rounded-lg text-gray-300 hover:text-white hover:border-white">
                         Learn more
                     </a>
@@ -47,13 +47,13 @@
         </div>
 
         <div class="space-y-6">
-            <div class="bg-[#252A2E] flex-row rounded-xl p-6 flex flex-col gap-8 items-center">
+            <div class="bg-[#252A2E] flex-row rounded-xl p-6 flex gap-8 items-center">
 
                 <div class="w-[320px] shrink-0 aspect-square rounded-xl overflow-hidden">
                     <img src="/IPT-Website/assets/samplepic.jpg" alt="What P3R offers picture" class="w-full h-full object-cover">
                 </div>
 
-                <div class="flex-grow space-y-3 w-full pl-14 text-center text-left">
+                <div class="flex-grow space-y-3 w-full pl-14 text-left">
                     <h2 class="text-3xl font-black text-white">What does P3R offer?</h2>
                     <p class="text-xs text-[18px] text-gray-400">
                         P3R lets consumers buy PCs / PC parts and rent PCs based on their needs and preferences for work,
