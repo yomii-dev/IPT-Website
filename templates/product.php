@@ -1,10 +1,10 @@
 <!--PRODUCT PAGE-->
 <?php
-$page = 'Products';
+$page = "Products";
 
 try {
-    $conn = require_once '../includes/mysqli.inc.php';
-    $query = 'SELECT * FROM ProductsInfo';
+    $conn = require_once "../includes/mysqli.inc.php";
+    $query = "SELECT * FROM ProductsInfo";
 
     $result = $conn->query($query);
 } catch (mysqli_sql_exception $e) {
@@ -25,8 +25,8 @@ try {
 <body class="bg-[#121316] text-white min-h-screen flex flex-col justify-between font-sans">
 
     <!--NAVBAR LAYOUT-->
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] .
-        '/IPT-Website/includes/navbar.php'; ?>
+    <?php require_once $_SERVER["DOCUMENT_ROOT"] .
+        "/IPT-Website/includes/navbar.php"; ?>
 
     <!--MAIN CONTENT-->
     <main class="w-full max-w-7xl mx-auto px-6 space-y-8 mb-16">
@@ -48,7 +48,7 @@ try {
         <div class="flex flex-col lg:flex-row gap-8 items-start w-full">
 
             <!--FILTER SIDEBAR CONTAINER-->
-            <div class="w-full lg:w-[280px] shrink-0 bg-[#252A2E] border border-gray-800/60 rounded-xl p-6 space-y-6 text-white sticky top-4">
+            <form class="w-full lg:w-[280px] shrink-0 bg-[#252A2E] border border-gray-800/60 rounded-xl p-6 space-y-6 text-white sticky top-4">
 
                 <div class="flex items-center justify-between">
                     <h2 class="text-lg font-bold tracking-wide text-gray-300">FILTER</h2>
@@ -127,7 +127,7 @@ try {
                         </label>
                     </div>
 
-                </div>
+            </form>
 
         </div>
 
@@ -139,23 +139,23 @@ try {
 
                 <?php if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        $name = htmlspecialchars($row['Product_Name']);
-                        $desc = htmlspecialchars($row['Product_Desc']);
-                        $category = htmlspecialchars($row['Product_Category']);
-                        $price = htmlspecialchars($row['Product_Price']);
-                        $stock = htmlspecialchars($row['InStock']);
-                        $image = '../assets/' . htmlspecialchars($row['Image']);
+                        $name = htmlspecialchars($row["Product_Name"]);
+                        $desc = htmlspecialchars($row["Product_Desc"]);
+                        $category = htmlspecialchars($row["Product_Category"]);
+                        $price = htmlspecialchars($row["Product_Price"]);
+                        $stock = htmlspecialchars($row["InStock"]);
+                        $image = "../assets/" . htmlspecialchars($row["Image"]);
 
                         echo '<div class="bg-[#252A2E] rounded-xl aspect-[3/4] w-full p-4">';
                         echo "<img class=\"aspect-square\" src=\"$image\" alt=\"$name\">";
-                        echo $name . '<br>';
-                        echo $desc . '<br>';
-                        echo "₱$price" . '<br>';
+                        echo $name . "<br>";
+                        echo $desc . "<br>";
+                        echo "₱$price" . "<br>";
                         echo "Qty: $stock";
-                        echo '</div>';
+                        echo "</div>";
                     }
                 } else {
-                    echo '0 results';
+                    echo "0 results";
                 } ?>
             </div>
 
@@ -166,8 +166,8 @@ try {
     <!--Hanggang dito lang may backend, di kasali footer-->
 
     <!--FOOTER LAYOUT-->
-    <?php require_once $_SERVER['DOCUMENT_ROOT'] .
-        '/IPT-Website/includes/footer.php'; ?>
+    <?php require_once $_SERVER["DOCUMENT_ROOT"] .
+        "/IPT-Website/includes/footer.php"; ?>
 
 </body>
 
