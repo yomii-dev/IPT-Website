@@ -129,36 +129,45 @@ try {
 
             </form>
 
-        </div>
+            <!--NOTE: Experimental, change to your liking-->
+            <!--Chore: only show cart when something is in it-->
+            <!--alternatively: show something like 'no items in cart' when empty-->
+            <div class="">
+                <hr class="text-white">
 
-            <!--PRODUCTS-->
-            <div class="flex-grow w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5"><!--Dont remove it-->
-
-                <!--Here, similar din sa service php but I added 4 column instead of 1. Again, sa admin side maeedit
-                    para hindi na sa code nito mageedit just like what sir revealed to us last 3 weeks ago.-->
-
-                <?php if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        $name = htmlspecialchars($row["Product_Name"]);
-                        $desc = htmlspecialchars($row["Product_Desc"]);
-                        $category = htmlspecialchars($row["Product_Category"]);
-                        $price = htmlspecialchars($row["Product_Price"]);
-                        $stock = htmlspecialchars($row["InStock"]);
-                        $image = "../assets/" . htmlspecialchars($row["Image"]);
-
-                        echo '<div class="bg-[#252A2E] rounded-xl aspect-[3/4] w-full p-4">';
-                        echo "<img class=\"aspect-square\" src=\"$image\" alt=\"$name\">";
-                        echo $name . "<br>";
-                        echo $desc . "<br>";
-                        echo "₱$price" . "<br>";
-                        echo "Qty: $stock";
-                        echo "</div>";
-                    }
-                } else {
-                    echo "0 results";
-                } ?>
+                <h2 class="text-lg">Cart</h2>
+                <!--Chore: add an 'add to cart' functionality then store the items in session(also add that)-->
+                <!--here, they can increase(?) and remove items from their cart-->
             </div>
 
+        </div>
+
+        <!--PRODUCTS-->
+        <div class="flex-grow w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5"><!--Dont remove it-->
+
+            <!--Here, similar din sa service php but I added 4 column instead of 1. Again, sa admin side maeedit
+            para hindi na sa code nito mageedit just like what sir revealed to us last 3 weeks ago.-->
+
+            <?php if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $name = htmlspecialchars($row["Product_Name"]);
+                    $desc = htmlspecialchars($row["Product_Desc"]);
+                    $category = htmlspecialchars($row["Product_Category"]);
+                    $price = htmlspecialchars($row["Product_Price"]);
+                    $stock = htmlspecialchars($row["InStock"]);
+                    $image = "../assets/" . htmlspecialchars($row["Image"]);
+
+                    echo '<div class="bg-[#252A2E] rounded-xl aspect-[3/4] w-full p-4">';
+                    echo "<img class=\"aspect-square\" src=\"$image\" alt=\"$name\">";
+                    echo $name . "<br>";
+                    echo $desc . "<br>";
+                    echo "₱$price" . "<br>";
+                    echo "Qty: $stock";
+                    echo "</div>";
+                }
+            } else {
+                echo "0 results";
+            } ?>
         </div>
 
     </main>
