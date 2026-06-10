@@ -1,3 +1,4 @@
+<!--LOGIN THINGY-->
 <?php
 // Logout: destroy session and remove cookie
 session_start();
