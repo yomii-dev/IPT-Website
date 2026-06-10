@@ -1,16 +1,64 @@
 <!--PRODUCT PAGE-->
 <?php
+session_start();
 $page = "Products";
+
+// ensure cart exists
+if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
 
 try {
     $conn = require_once "../includes/mysqli.inc.php";
     $query = "SELECT * FROM ProductsInfo";
-
     $result = $conn->query($query);
 } catch (mysqli_sql_exception $e) {
     die("SQL Error: $e");
 }
-$cart_items = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["cart"])) {
+        // sanitize / cast inputs
+        $name = isset($_POST['name']) ? trim($_POST['name']) : '';
+        $qty = isset($_POST['qty']) ? (int)$_POST['qty'] : 0;
+        $price = isset($_POST['price']) ? (float)$_POST['price'] : 0.0;
+
+        if ($qty > 0 && $name !== '') {
+            $found = false;
+            // iterate by key, not by reference
+            foreach ($_SESSION["cart"] as $key => $item) {
+                if (isset($item["name"]) && $item["name"] === $name) {
+                    // update qty in-place using the key
+                    $_SESSION["cart"][$key]["qty"] = (int)$_SESSION["cart"][$key]["qty"] + $qty;
+                    $found = true;
+                    break;
+                }
+            }
+            if (!$found) {
+                $_SESSION["cart"][] = [
+                    "name" => $name,
+                    "price" => $price,
+                    "qty" => $qty,
+                ];
+            }
+        }
+    } elseif (isset($_POST["remove"])) {
+        // Remove by name (submitted from the single-row form below)
+        $name = isset($_POST["name"]) ? trim($_POST["name"]) : '';
+        if ($name !== '') {
+            foreach ($_SESSION["cart"] as $key => $item) {
+                if (isset($item["name"]) && $item["name"] === $name) {
+                    unset($_SESSION["cart"][$key]);
+                    // reindex to keep array numeric keys contiguous (optional)
+                    $_SESSION["cart"] = array_values($_SESSION["cart"]);
+                    break;
+                }
+            }
+        }
+    }
+}
+
+$cart_items = $_SESSION["cart"];
 ?>
 
 <!DOCTYPE html>
@@ -139,58 +187,80 @@ $cart_items = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
                 <div class="flex items-center justify-between border-b border-gray-700 pb-2">
                     <h2 class="text-lg font-bold tracking-wide text-gray-300">Cart</h2>
                     <span class="text-xs bg-[#121316] px-2 py-1 rounded-full text-gray-400">
-                        <?php echo empty($cart_items) ? 'Empty' : count($cart_items) . ' items'; ?>
+                        <?php echo empty($cart_items)
+                            ? "Empty"
+                            : count($cart_items) . " items"; ?>
                     </span>
-            </div>
-
-                <div class="space-y-3 text-sm text-gray-400">
-                    <?php if (!empty($cart_items)): ?>
-                        <?php foreach ($cart_items as $item): ?>
-                             <div class="flex justify-between items-center bg-[#121316] p-2 rounded-lg text-white">
-                                    <div>
-                                        <p class="font-semibold"><?php echo htmlspecialchars($item['name']); ?></p>
-                                        <p class="text-xs text-gray-400">₱<?php echo htmlspecialchars($item['price']); ?> x <?php echo htmlspecialchars($item['qty']); ?></p>
-                                    </div>
-                                     <button type="button" class="text-red-500 hover:text-red-400 text-xs cursor-pointer">Remove</button>
-                                </div>
-                                <?php endforeach; ?>
-                        <?php else: ?>
-                    <p class="text-center py-2 italic text-gray-500">No items in cart</p>
-                    <?php endif; ?>
                 </div>
+            </div>
 
-                <!--Chore: add an 'add to cart' functionality then store the items in session(also add that)-->
-                <!--here, they can increase(?) and remove items from their cart-->
+            <div class="space-y-3 text-sm text-gray-400">
+                <?php if (!empty($cart_items)): ?>
+                    <?php foreach ($cart_items as $key => $item): ?>
+                        <?php if (empty($item["name"])) continue; ?>
+                        <form method="POST" action="product.php" class="flex justify-between items-center bg-[#121316] p-2 rounded-lg text-white">
+                            <div>
+                                <p class="font-semibold"><?php echo htmlspecialchars($item["name"]); ?></p>
+                                <p class="text-xs text-gray-400">₱<?php echo htmlspecialchars($item["price"]); ?> x <?php echo htmlspecialchars($item["qty"]); ?></p>
+                            </div>
+                            <input type="hidden" name="name" value="<?php echo htmlspecialchars($item["name"]); ?>">
+                            <input type="submit" name="remove" class="text-red-500 hover:text-red-400 text-xs" value="Remove">
+                        </form>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p class="text-center py-2 italic text-gray-500">No items in cart</p>
+                <?php endif; ?>
+            </div>
 
             </div>
-        </div>
 
         <!--PRODUCTS-->
         <div class="flex-grow w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5"><!--Dont remove it-->
 
             <!--Here, similar din sa service php but I added 4 column instead of 1. Again, sa admin side maeedit
             para hindi na sa code nito mageedit just like what sir revealed to us last 3 weeks ago.-->
-
             <?php if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
+
                     $name = htmlspecialchars($row["Product_Name"]);
                     $desc = htmlspecialchars($row["Product_Desc"]);
                     $category = htmlspecialchars($row["Product_Category"]);
                     $price = htmlspecialchars($row["Product_Price"]);
                     $stock = htmlspecialchars($row["InStock"]);
                     $image = "../assets/" . htmlspecialchars($row["Image"]);
-
-                    echo '<div class="bg-[#252A2E] rounded-xl aspect-[3/4] w-full p-4">';
-                    echo "<img class=\"aspect-square\" src=\"$image\" alt=\"$name\">";
-                    echo $name . "<br>";
-                    echo $desc . "<br>";
-                    echo "₱$price" . "<br>";
-                    echo "Qty: $stock";
-                    echo "</div>";
+                    ?>
+                                <form method="POST" class="bg-[#252A2E] rounded-xl aspect-[3/4] w-full p-4 flex flex-col justify-between">
+                                    <img class="aspect-square object-cover rounded-lg" src="<?= $image ?>" alt="<?= $name ?>">
+                                    <div class="mt-2">
+                                        <p class="font-bold"><?= $name ?></p>
+                                        <p class="text-emerald-400 font-semibold">₱<?= $price ?></p>
+                                        <p class="text-xs text-gray-400">Stock: <?= $stock ?></p>
+                                    </div>
+                                    <div class="mt-4 space-y-2">
+                                        <input
+                                            type="number"
+                                            name="qty"
+                                            value="1"
+                                            min="1"
+                                            max="<?= $stock ?>"
+                                            class="w-full bg-[#121316] text-white border border-gray-700 rounded p-1 text-center"
+                                        >
+                                        <input type="hidden" name="name" value="<?= $name ?>">
+                                        <input type="hidden" name="price" value="<?= $price ?>">
+                                        <input
+                                            type="submit"
+                                            name="cart"
+                                            value="Add to Cart"
+                                            class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-1.5 px-3 rounded text-sm cursor-pointer transition"
+                                        >
+                                    </div>
+                                </form>
+                        <?php
                 }
             } else {
-                echo "0 results";
+                echo "<p class='text-gray-500 italic col-span-full text-center'>0 results</p>";
             } ?>
+
         </div>
 
     </main>
