@@ -209,6 +209,7 @@ $cart_items = $_SESSION["cart"];
                     <?php endforeach; ?>
 
                     <!-- CHECKOUT BUTTON but goes back to product page for now-->
+                    <!-- PROBLEM: filter section does not fully scroll down when there is too much items, checkout btn cannot see when this happens  -->
                      <div class="pt-2 border-t border-gray-700/50">
                         <form method="GET" action="product.php">
                             <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold
