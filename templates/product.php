@@ -207,6 +207,16 @@ $cart_items = $_SESSION["cart"];
                             <input type="submit" name="remove" class="text-red-500 hover:text-red-400 text-xs" value="Remove">
                         </form>
                     <?php endforeach; ?>
+
+                    <!-- CHECKOUT BUTTON but goes back to product page for now-->
+                     <div class="pt-2 border-t border-gray-700/50">
+                        <form method="GET" action="product.php">
+                            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold
+                            py-2 px-4 rounded-lg text-center transition cursor-pointer text-sm">
+                            Checkout
+                            </button>
+                        </form>
+                     </div>
                 <?php else: ?>
                     <p class="text-center py-2 italic text-gray-500">No items in cart</p>
                 <?php endif; ?>
