@@ -57,14 +57,14 @@
                 </p>
                 
                 <!--This is where the data input by user matches to the save user-data in database, if not create new one-->
-                <form action="put_something" method="POST" class="space-y-4">
+                <form action="login_handler.php" method="POST" class="space-y-4">
 
                     <input type="email" name="email" placeholder="Email" required
                            class="w-full bg-[#22252a] border border-gray-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gray-500">
                     <input type="password" name="password" placeholder="Password" required
                            class="w-full bg-[#22252a] border border-gray-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gray-500">
                     
-                    <button type="submit" class="w-full bg-[#D9D9D9] text-black font-bold text-sm py-2.5 rounded-lg hover:bg-gray-200 transition">
+                    <button type="submit" name="login" class="w-full bg-[#D9D9D9] text-black font-bold text-sm py-2.5 rounded-lg hover:bg-gray-200 transition">
                         Login
                     </button> <!--If login clicks, it should show user name at profile icon in homepage, no need a profile pic-->
                     

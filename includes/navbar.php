@@ -25,14 +25,20 @@ $unhighlighted = 'bg-[#262930] text-gray-300 hover:bg-gray-700';
                 font-medium px-4 py-1.5 rounded-lg text-xs">Service</a>
         </div>
         <!--Chore: In this part, dapat lalabas yung logout tas didirect siya sa login page-->
-        <div class="flex items-center pr-2">
-            <img src="/IPT-Website/assets/user_profile.svg" alt="Your Profile" class="h-7 w-auto select-none">
-        </div>
+        <?php
+        if (session_status() == PHP_SESSION_NONE) {
+            @session_start();
+        }
+        ?>
 
-        <!--Chore: if-else for when user is logged-in or not-->
-        <!--<div class="flex items-center gap-4 text-xs font-medium text-gray-400">
-            <a href="login.php" class="text-white">Login</a>
-            <a href="signup.php" class="hover:text-white">Sign Up</a>
-        </div>-->
+        <div class="flex items-center gap-4 text-xs font-medium text-gray-400">
+            <?php if (isset($_SESSION['user_email']) && $_SESSION['user_email'] !== ''): ?>
+                <span class="text-gray-200 text-sm mr-2"><?= htmlspecialchars($_SESSION['user_email']) ?></span>
+                <a href="/IPT-Website/templates/logout.php" class="hover:text-white">Logout</a>
+            <?php else: ?>
+                <a href="/IPT-Website/templates/login.php" class="text-white">Login</a>
+                <a href="/IPT-Website/templates/signup.php" class="hover:text-white">Sign Up</a>
+            <?php endif; ?>
+        </div>
     </nav>
 </div>
