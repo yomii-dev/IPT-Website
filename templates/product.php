@@ -10,7 +10,9 @@ try {
 } catch (mysqli_sql_exception $e) {
     die("SQL Error: $e");
 }
+$cart_items = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
 ?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -131,15 +133,36 @@ try {
 
             <!--NOTE: Experimental, change to your liking-->
             <!--Chore: only show cart when something is in it-->
-            <!--alternatively: show something like 'no items in cart' when empty-->
-            <div class="">
-                <hr class="text-white">
+            <!--added: show something like 'no items in cart' when empty and show number of items when it has item/s-->
 
-                <h2 class="text-lg">Cart</h2>
-                <!--Chore: add an 'add to cart' functionality then store the items in session(also add that)-->
-                <!--here, they can increase(?) and remove items from their cart-->
+            <div class="bg-[#252A2E] border border-gray-800/60 rounded-xl p-6 space-y-4 text-white">
+                <div class="flex items-center justify-between border-b border-gray-700 pb-2">
+                    <h2 class="text-lg font-bold tracking-wide text-gray-300">Cart</h2>
+                    <span class="text-xs bg-[#121316] px-2 py-1 rounded-full text-gray-400">
+                        <?php echo empty($cart_items) ? 'Empty' : count($cart_items) . ' items'; ?>
+                    </span>
             </div>
 
+                <div class="space-y-3 text-sm text-gray-400">
+                    <?php if (!empty($cart_items)): ?>
+                        <?php foreach ($cart_items as $item): ?>
+                             <div class="flex justify-between items-center bg-[#121316] p-2 rounded-lg text-white">
+                                    <div>
+                                        <p class="font-semibold"><?php echo htmlspecialchars($item['name']); ?></p>
+                                        <p class="text-xs text-gray-400">₱<?php echo htmlspecialchars($item['price']); ?> x <?php echo htmlspecialchars($item['qty']); ?></p>
+                                    </div>
+                                     <button type="button" class="text-red-500 hover:text-red-400 text-xs cursor-pointer">Remove</button>
+                                </div>
+                                <?php endforeach; ?>
+                        <?php else: ?>
+                    <p class="text-center py-2 italic text-gray-500">No items in cart</p>
+                    <?php endif; ?>
+                </div>
+
+                <!--Chore: add an 'add to cart' functionality then store the items in session(also add that)-->
+                <!--here, they can increase(?) and remove items from their cart-->
+
+            </div>
         </div>
 
         <!--PRODUCTS-->
