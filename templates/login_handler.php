@@ -8,9 +8,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $email = isset($_POST['email']) ? trim($_POST['email']) : '';
-$password = isset($_POST['password']) ? $_POST['password'] : '';
+$pass = isset($_POST['password']) ? $_POST['password'] : '';
 
-if ($email === '' || $password === '') {
+if ($email === '' || $pass === '') {
     header('Location: login.php');
     exit();
 }
@@ -24,7 +24,7 @@ $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 $stmt->close();
 
-if ($user && (int)$user['Is_Banned'] === 0 && ($password === $user['User_Pass'] || password_verify($password, $user['User_Pass']))) {
+if ($user && (int)$user['Is_Banned'] === 0 && $pass === $user['User_Pass']) {
     $updateStmt = $conn->prepare('UPDATE UserAccounts SET Last_Login = NOW() WHERE Id = ?');
     $updateStmt->bind_param('i', $user['Id']);
     $updateStmt->execute();
