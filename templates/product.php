@@ -252,7 +252,7 @@ $cart_items = $_SESSION["cart"];
                     <!--Chore: add functionality-->
                      <div class="pt-2 border-t border-gray-700/50">
                         <form method="POST" action="product.php">
-                            <button type="submit" name="checkout" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold
+                            <button type="submit" name="checkout" class="w-full bg-blue-600 hover:bg-emerald-500 text-white font-bold
                             py-2 px-4 rounded-lg text-center transition cursor-pointer text-sm">
                             Checkout
                             </button>
