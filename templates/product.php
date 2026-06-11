@@ -4,8 +4,8 @@ session_start();
 $page = "Products";
 
 // ensure cart exists
-if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart'])) {
-    $_SESSION['cart'] = [];
+if (!isset($_SESSION["cart"]) || !is_array($_SESSION["cart"])) {
+    $_SESSION["cart"] = [];
 }
 
 try {
@@ -19,17 +19,18 @@ try {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["cart"])) {
         // sanitize / cast inputs
-        $name = isset($_POST['name']) ? trim($_POST['name']) : '';
-        $qty = isset($_POST['qty']) ? (int)$_POST['qty'] : 0;
-        $price = isset($_POST['price']) ? (float)$_POST['price'] : 0.0;
+        $name = isset($_POST["name"]) ? trim($_POST["name"]) : "";
+        $qty = isset($_POST["qty"]) ? (int) $_POST["qty"] : 0;
+        $price = isset($_POST["price"]) ? (float) $_POST["price"] : 0.0;
 
-        if ($qty > 0 && $name !== '') {
+        if ($qty > 0 && $name !== "") {
             $found = false;
             // iterate by key, not by reference
             foreach ($_SESSION["cart"] as $key => $item) {
                 if (isset($item["name"]) && $item["name"] === $name) {
                     // update qty in-place using the key
-                    $_SESSION["cart"][$key]["qty"] = (int)$_SESSION["cart"][$key]["qty"] + $qty;
+                    $_SESSION["cart"][$key]["qty"] =
+                        (int) $_SESSION["cart"][$key]["qty"] + $qty;
                     $found = true;
                     break;
                 }
@@ -44,8 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } elseif (isset($_POST["remove"])) {
         // Remove by name (submitted from the single-row form below)
-        $name = isset($_POST["name"]) ? trim($_POST["name"]) : '';
-        if ($name !== '') {
+        $name = isset($_POST["name"]) ? trim($_POST["name"]) : "";
+        if ($name !== "") {
             foreach ($_SESSION["cart"] as $key => $item) {
                 if (isset($item["name"]) && $item["name"] === $name) {
                     unset($_SESSION["cart"][$key]);
@@ -179,10 +180,7 @@ $cart_items = $_SESSION["cart"];
 
             </form>
 
-            <!--NOTE: Experimental, change to your liking-->
-            <!--Chore: only show cart when something is in it-->
-            <!--added: show something like 'no items in cart' when empty and show number of items when it has item/s-->
-
+            <!--Cart Header + no. of items-->
             <div class="bg-[#252A2E] border border-gray-800/60 rounded-xl p-6 space-y-4 text-white">
                 <div class="flex items-center justify-between border-b border-gray-700 pb-2">
                     <h2 class="text-lg font-bold tracking-wide text-gray-300">Cart</h2>
@@ -194,22 +192,45 @@ $cart_items = $_SESSION["cart"];
                 </div>
             </div>
 
-            <div class="space-y-3 text-sm text-gray-400">
+            <!--Cart Items-->
+            <div class="space-y-3 text-sm text-gray-400 max-h-64 overflow-y-auto">
+
                 <?php if (!empty($cart_items)): ?>
+
                     <?php foreach ($cart_items as $key => $item): ?>
-                        <?php if (empty($item["name"])) continue; ?>
+                        <?php if (empty($item["name"])) {
+                            continue;
+                        } ?>
                         <form method="POST" action="product.php" class="flex justify-between items-center bg-[#121316] p-2 rounded-lg text-white">
                             <div>
-                                <p class="font-semibold"><?php echo htmlspecialchars($item["name"]); ?></p>
-                                <p class="text-xs text-gray-400">₱<?php echo htmlspecialchars($item["price"]); ?> x <?php echo htmlspecialchars($item["qty"]); ?></p>
+                                <p class="font-semibold">
+                                    <?php echo htmlspecialchars(
+                                        $item["name"],
+                                    ); ?>
+                                </p>
+                                <p class="text-xs text-gray-400">
+                                    ₱<?php echo htmlspecialchars(
+                                        $item["price"],
+                                    ); ?>
+                                    x <?php echo htmlspecialchars(
+                                        $item["qty"],
+                                    ); ?>
+                                </p>
                             </div>
-                            <input type="hidden" name="name" value="<?php echo htmlspecialchars($item["name"]); ?>">
+                            <input
+                                type="hidden"
+                                name="name"
+                                value="<?php echo htmlspecialchars(
+                                    $item["name"],
+                                ); ?>"
+                            >
+                                <!--Remove button-->
                             <input type="submit" name="remove" class="text-red-500 hover:text-red-400 text-xs" value="Remove">
                         </form>
                     <?php endforeach; ?>
 
-                    <!-- CHECKOUT BUTTON but goes back to product page for now-->
-                    <!-- PROBLEM: filter section does not fully scroll down when there is too much items, checkout btn cannot see when this happens  -->
+                    <!--CHECKOUT BUTTON-->
+                    <!--Chore: add functionality-->
                      <div class="pt-2 border-t border-gray-700/50">
                         <form method="GET" action="product.php">
                             <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold
@@ -219,8 +240,10 @@ $cart_items = $_SESSION["cart"];
                         </form>
                      </div>
                 <?php else: ?>
-                    <p class="text-center py-2 italic text-gray-500">No items in cart</p>
+                     <p class="text-center py-2 italic text-gray-500">No items in cart</p>
                 <?php endif; ?>
+
+
             </div>
 
             </div>
