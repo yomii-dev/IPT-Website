@@ -32,8 +32,8 @@ $unhighlighted = 'bg-[#262930] text-gray-300 hover:bg-gray-700';
         ?>
 
         <div class="flex items-center gap-4 text-xs font-medium text-gray-400">
-            <?php if (isset($_SESSION['user_email']) && $_SESSION['user_email'] !== ''): ?>
-                <span class="text-gray-200 text-sm mr-2"><?= htmlspecialchars($_SESSION['user_email']) ?></span>
+            <?php if (isset($_SESSION['user_name']) && $_SESSION['user_name'] !== ''): ?>
+                <span class="text-gray-200 text-sm mr-2"><?= htmlspecialchars($_SESSION['user_name']) ?></span>
                 <a href="/IPT-Website/templates/logout.php" class="hover:text-white">Logout</a>
             <?php else: ?>
                 <a href="/IPT-Website/templates/login.php" class="text-white">Login</a>
