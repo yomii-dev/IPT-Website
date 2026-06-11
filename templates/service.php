@@ -55,7 +55,68 @@
 
                 <div class="flex-grow space-y-3 w-full pl-14">
 
-                    <h3 class="text-3xl font-black text-white">Lorem ipsum dolor sit amet</h3>
+                    <h3 class="text-3xl font-black text-white">PC Renting</h3>
+
+                    <ul class="text-[16px] text-gray-400 space-y-1.5 list-disc list-inside">
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>consectetur adipiscing elit sed do</li>
+                        <li>eiusmod tempor incididunt ut labore</li>
+                        <li>et dolore magna aliqua.</li>
+                        <li>Ut enim ad minim veniam, quis nostrud</li>
+                        <li>exercitation ullamco laboris</li>
+                        <li>nisi ut aliquip ex ea commodo consequat</li>
+                    </ul>
+                    <button class="bg-gray-200 text-black font-bold text-[14px] px-6 py-2 rounded-lg hover:bg-white shadow-sm">
+                        Rent
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="space-y-6">
+
+            <div class="bg-[#252A2E] rounded-xl p-6 flex flex-col flex-row gap-8 items-center">
+
+                <div class="w-full md:w-[320px] shrink-0 aspect-square rounded-xl overflow-hidden">
+                    <img src="/IPT-Website/assets/samplepic.jpg" alt="Dream PC Setup" class="w-full h-full object-cover">
+                </div>
+
+                <div class="flex-grow space-y-3 w-full pl-14">
+
+                    <h3 class="text-3xl font-black text-white">Disk Reformatting</h3>
+
+                    <ul class="text-[16px] text-gray-400 space-y-1.5 list-disc list-inside">
+                        <li>Lorem ipsum dolor sit amet</li>
+                        <li>consectetur adipiscing elit sed do</li>
+                        <li>eiusmod tempor incididunt ut labore</li>
+                        <li>et dolore magna aliqua.</li>
+                        <li>Ut enim ad minim veniam, quis nostrud</li>
+                        <li>exercitation ullamco laboris</li>
+                        <li>nisi ut aliquip ex ea commodo consequat</li>
+                    </ul>
+                    <button class="bg-gray-200 text-black font-bold text-[14px] px-6 py-2 rounded-lg hover:bg-white shadow-sm">
+                        Rent
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="space-y-6">
+
+            <div class="bg-[#252A2E] rounded-xl p-6 flex flex-col flex-row gap-8 items-center">
+
+                <div class="w-full md:w-[320px] shrink-0 aspect-square rounded-xl overflow-hidden">
+                    <img src="/IPT-Website/assets/samplepic.jpg" alt="Dream PC Setup" class="w-full h-full object-cover">
+                </div>
+
+                <div class="flex-grow space-y-3 w-full pl-14">
+
+                    <h3 class="text-3xl font-black text-white">Data Recovery</h3>
 
                     <ul class="text-[16px] text-gray-400 space-y-1.5 list-disc list-inside">
                         <li>Lorem ipsum dolor sit amet</li>
