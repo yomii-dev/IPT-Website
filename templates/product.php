@@ -56,6 +56,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             }
         }
+    } elseif (isset($_POST["checkout"])) {
+        // Clear cart on successful checkout
+        $_SESSION["cart"] = [];
+        header("Location: product.php?success=1");
+        exit();
     }
 }
 
@@ -196,6 +201,20 @@ $cart_items = $_SESSION["cart"];
             <div class="space-y-3 text-sm text-gray-400 max-h-64 overflow-y-auto">
 
                 <?php if (!empty($cart_items)): ?>
+                    <?php
+                    $total_price = 0;
+                    foreach ($cart_items as $item) {
+                        if (!empty($item["name"])) {
+                            $total_price += (float)$item["price"] * (int)$item["qty"];
+                        }
+                    }
+                    ?>
+
+                    <div class="flex justify-between items-center pb-2 border-b border-gray-700 text-white font-bold">
+                        <span>Total Price:</span>
+                        <span class="text-emerald-400">₱<?php echo number_format($total_price, 2); ?></span>
+                    </div>
+
 
                     <?php foreach ($cart_items as $key => $item): ?>
                         <?php if (empty($item["name"])) {
@@ -232,8 +251,8 @@ $cart_items = $_SESSION["cart"];
                     <!--CHECKOUT BUTTON-->
                     <!--Chore: add functionality-->
                      <div class="pt-2 border-t border-gray-700/50">
-                        <form method="GET" action="product.php">
-                            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold
+                        <form method="POST" action="product.php">
+                            <button type="submit" name="checkout" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold
                             py-2 px-4 rounded-lg text-center transition cursor-pointer text-sm">
                             Checkout
                             </button>
