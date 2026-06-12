@@ -2,6 +2,12 @@
 <?php
 session_start();
 
+function returnLogin($errorcode)
+{
+    header("Location: login.php?error=$errorcode");
+    exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: login.php');
     exit();
@@ -11,8 +17,7 @@ $email = isset($_POST['email']) ? trim($_POST['email']) : '';
 $pass = isset($_POST['password']) ? $_POST['password'] : '';
 
 if ($email === '' || $pass === '') {
-    header('Location: login.php');
-    exit();
+    returnLogin(1);
 }
 
 $conn = require_once $_SERVER['DOCUMENT_ROOT'] .
@@ -27,11 +32,15 @@ $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 $stmt->close();
 
-if (
-    $user &&
-    (int) $user['Is_Banned'] === 0 &&
-    password_verify($pass, $user['User_Pass'])
-) {
+if (!$user) {
+    returnLogin(2);
+}
+
+if ((int) $user['Is_Banned'] === 1) {
+    returnLogin(3);
+}
+
+if (password_verify($pass, $user['User_Pass'])) {
     $updateStmt = $conn->prepare(
         'UPDATE UserAccounts SET Last_Login = NOW() WHERE Id = ?',
     );
@@ -47,8 +56,7 @@ if (
     exit();
 }
 
-header('Location: login.php');
-exit();
+returnLogin(4);
 
 
 ?>
