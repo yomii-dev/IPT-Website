@@ -15,17 +15,26 @@ if ($email === '' || $pass === '') {
     exit();
 }
 
-$conn = require_once $_SERVER['DOCUMENT_ROOT'] . '/IPT-Website/includes/mysqli.inc.php';
+$conn = require_once $_SERVER['DOCUMENT_ROOT'] .
+    '/IPT-Website/includes/mysqli.inc.php';
 
-$stmt = $conn->prepare('SELECT Id, Username, Email, User_Pass, Is_Banned FROM UserAccounts WHERE Email = ? LIMIT 1');
+$stmt = $conn->prepare(
+    'SELECT Id, Username, Email, User_Pass, Is_Banned FROM UserAccounts WHERE Email = ? LIMIT 1',
+);
 $stmt->bind_param('s', $email);
 $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 $stmt->close();
 
-if ($user && (int)$user['Is_Banned'] === 0 && $pass === $user['User_Pass']) {
-    $updateStmt = $conn->prepare('UPDATE UserAccounts SET Last_Login = NOW() WHERE Id = ?');
+if (
+    $user &&
+    (int) $user['Is_Banned'] === 0 &&
+    password_verify($pass, $user['User_Pass'])
+) {
+    $updateStmt = $conn->prepare(
+        'UPDATE UserAccounts SET Last_Login = NOW() WHERE Id = ?',
+    );
     $updateStmt->bind_param('i', $user['Id']);
     $updateStmt->execute();
     $updateStmt->close();
@@ -40,5 +49,6 @@ if ($user && (int)$user['Is_Banned'] === 0 && $pass === $user['User_Pass']) {
 
 header('Location: login.php');
 exit();
+
 
 ?>
