@@ -77,7 +77,7 @@ $cart_items = $_SESSION["cart"];
     <title>P3R | Product</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!--Attempting to do: show user_name on Thank you message-->  <!--Ts javascript frying me son-->
-    <script>                                                      
+    <script>
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('success') == '1') {
