@@ -8,14 +8,42 @@ if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
+// get product info from db
 try {
     $conn = require_once '../includes/mysqli.inc.php';
-    $query = 'SELECT * FROM ProductsInfo';
-    $result = $conn->query($query);
+
+    if (empty($_GET['categories'])) {
+        $query = 'SELECT * FROM ProductsInfo';
+        $result = $conn->query($query);
+    } elseif (!empty($_GET['categories']) && is_array($_GET['categories'])) {
+        $query = 'SELECT * FROM ProductsInfo WHERE 1=1';
+        $params = [];
+        $types = '';
+
+        $categories = $_GET['categories'];
+
+        // make those placeholder (?, ?, ?)
+        $placeholders = implode(',', array_fill(0, count($categories), '?'));
+        $query .= " AND Product_Category IN ($placeholders)";
+
+        // make the `ssssss`
+        $types = str_repeat('s', count($categories));
+        $params = $categories;
+
+        $stmt = $conn->prepare($query);
+
+        if (!empty($params)) {
+            $stmt->bind_param($types, ...$params);
+        }
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+    }
 } catch (mysqli_sql_exception $e) {
     die("SQL Error: $e");
 }
 
+// add products to cart
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['cart'])) {
         // sanitize / cast inputs
@@ -63,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ? urlencode($_SESSION['user_name'])
             : 'Guest';
         header('Location: product.php?success=1&user=' . $user);
-        exit();
+        die();
     }
 }
 
@@ -119,7 +147,7 @@ $cart_items = $_SESSION['cart'];
             <!--FILTER SIDEBAR CONTAINER-->
             <div class="w-full lg:w-[280px] shrink-0 bg-[#252A2E] border border-gray-800/60 rounded-xl p-6 space-y-6 text-white sticky top-4">
 
-                <form action="" class="space-y-6">
+                <form action="product.php" method="GET" class="space-y-6">
                      <div class="flex items-center justify-between">
                         <h2 class="text-lg font-bold tracking-wide text-gray-300">FILTER</h2>
                         <button type="reset" class="text-sm text-gray-400 hover:text-white">Clear all</button>
@@ -138,34 +166,47 @@ $cart_items = $_SESSION['cart'];
 
                         <div class="space-y-2.5">
                             <label class="flex items-center gap-3 text-sm text-gray-200">
-                                <input type="checkbox" name="category" value="cpu" class="w-3.5 h-3.5">
+                                <input type="checkbox" name="categories[]" value="cpu" class="w-3.5 h-3.5">
                                 <span>CPU</span>
                             </label>
                             <label class="flex items-center gap-3 text-sm text-gray-200">
-                                <input type="checkbox" name="category" value="ram" class="w-3.5 h-3.5">
+                                <input type="checkbox" name="categories[]" value="ram" class="w-3.5 h-3.5">
                                 <span>RAM</span>
                             </label>
                             <label class="flex items-center gap-3 text-sm text-gray-200">
-                                <input type="checkbox" name="category" value="gpu" class="w-3.5 h-3.5">
+                                <input type="checkbox" name="categories[]" value="gpu" class="w-3.5 h-3.5">
                                 <span>GPU</span>
                             </label>
                             <label class="flex items-center gap-3 text-sm text-gray-200">
-                                <input type="checkbox" name="category" value="motherboard" class="w-3.5 h-3.5">
+                                <input type="checkbox" name="categories[]" value="motherboard" class="w-3.5 h-3.5">
                                 <span>Motherboard</span>
                             </label>
                             <label class="flex items-center gap-3 text-sm text-gray-200">
-                                <input type="checkbox" name="category" value="psu" class="w-3.5 h-3.5">
+                                <input type="checkbox" name="categories[]" value="psu" class="w-3.5 h-3.5">
                                 <span>PSU</span>
                             </label>
                             <label class="flex items-center gap-3 text-sm text-gray-200">
-                                <input type="checkbox" name="category" value="cooling" class="w-3.5 h-3.5">
+                                <input type="checkbox" name="categories[]" value="cooling" class="w-3.5 h-3.5">
                                 <span>Cooling System</span>
+                            </label>
+                            <label class="flex items-center gap-3 text-sm text-gray-200">
+                                <input type="checkbox" name="categories[]" value="peripherals" class="w-3.5 h-3.5">
+                                <span>Peripherals</span>
+                            </label>
+                            <label class="flex items-center gap-3 text-sm text-gray-200">
+                                <input type="checkbox" name="categories[]" value="thermal paste" class="w-3.5 h-3.5">
+                                <span>Thermal Paste</span>
+                            </label>
+                            <label class="flex items-center gap-3 text-sm text-gray-200">
+                                <input type="checkbox" name="categories[]" value="bundle" class="w-3.5 h-3.5">
+                                <span>Bundle</span>
                             </label>
                         </div>
 
                     </details>
 
                     <!--PRICE RANGE SELECTION-->
+                    <!--Chore: Tweak price ranges-->
                     <details class="space-y-3">
 
                         <summary class="text-base font-extrabold text-gray-300">PRICE RANGE</summary>
@@ -200,6 +241,9 @@ $cart_items = $_SESSION['cart'];
                         </div>
 
                     </details>
+
+                    <!--Chore: make this prettier lmaoaoa-->
+                    <input type="submit" value="Apply Filters">
                 </form>
 
                 <!--Cart Header + no. of items-->
