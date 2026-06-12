@@ -53,18 +53,21 @@
                 </p>
                 
                 <!--Add a php and link to xampp mysql here for linking user's input data to database online-->
-                <form action="put_something_here" method="POST" class="space-y-4">
+                <form action="signup_handler.php" method="POST" class="space-y-4">
                     
                     <div class="flex gap-3">
-                        <input type="text" name="firstname" placeholder="First Name" required
+                        <input type="text" name="First_Name" placeholder="First Name" required
                                class="w-1/2 bg-[#22252a] border border-gray-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gray-500">
-                        <input type="text" name="lastname" placeholder="Last Name" required
+                        <input type="text" name="Last_Name" placeholder="Last Name" required
                                class="w-1/2 bg-[#22252a] border border-gray-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gray-500">
                     </div>
-                    
-                    <input type="email" name="email" placeholder="Email" required
+
+                    <input type="text" name="Username" placeholder="Username" required
                            class="w-full bg-[#22252a] border border-gray-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gray-500">
-                    <input type="password" name="password" placeholder="Password" required
+
+                    <input type="email" name="Email" placeholder="Email" required
+                           class="w-full bg-[#22252a] border border-gray-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gray-500">
+                    <input type="password" name="User_Pass" placeholder="Password" required
                            class="w-full bg-[#22252a] border border-gray-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gray-500">
                     
                     <button type="submit" class="w-full bg-[#D9D9D9] text-black font-bold text-sm py-2.5 rounded-lg hover:bg-gray-200 transition">

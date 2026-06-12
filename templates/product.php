@@ -147,7 +147,7 @@ try {
                         $image = "../assets/" . htmlspecialchars($row["Image"]);
 
                         echo '<div class="bg-[#252A2E] rounded-xl aspect-[3/4] w-full p-4">';
-                        echo "<img class=\"aspect-square\" src=\"$image\" alt=\"$name\">";
+                        echo "<img class=\"aspect-square object-cover\" src=\"$image\" alt=\"$name\">";
                         echo $name . "<br>";
                         echo $desc . "<br>";
                         echo "₱$price" . "<br>";
