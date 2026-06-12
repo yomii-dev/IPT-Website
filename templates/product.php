@@ -1,71 +1,73 @@
 <!--PRODUCT PAGE-->
 <?php
 session_start();
-$page = "Products";
+$page = 'Products';
 
 // ensure cart exists
-if (!isset($_SESSION["cart"]) || !is_array($_SESSION["cart"])) {
-    $_SESSION["cart"] = [];
+if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
 }
 
 try {
-    $conn = require_once "../includes/mysqli.inc.php";
-    $query = "SELECT * FROM ProductsInfo";
+    $conn = require_once '../includes/mysqli.inc.php';
+    $query = 'SELECT * FROM ProductsInfo';
     $result = $conn->query($query);
 } catch (mysqli_sql_exception $e) {
     die("SQL Error: $e");
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST["cart"])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['cart'])) {
         // sanitize / cast inputs
-        $name = isset($_POST["name"]) ? trim($_POST["name"]) : "";
-        $qty = isset($_POST["qty"]) ? (int) $_POST["qty"] : 0;
-        $price = isset($_POST["price"]) ? (float) $_POST["price"] : 0.0;
+        $name = isset($_POST['name']) ? trim($_POST['name']) : '';
+        $qty = isset($_POST['qty']) ? (int) $_POST['qty'] : 0;
+        $price = isset($_POST['price']) ? (float) $_POST['price'] : 0.0;
 
-        if ($qty > 0 && $name !== "") {
+        if ($qty > 0 && $name !== '') {
             $found = false;
             // iterate by key, not by reference
-            foreach ($_SESSION["cart"] as $key => $item) {
-                if (isset($item["name"]) && $item["name"] === $name) {
+            foreach ($_SESSION['cart'] as $key => $item) {
+                if (isset($item['name']) && $item['name'] === $name) {
                     // update qty in-place using the key
-                    $_SESSION["cart"][$key]["qty"] =
-                        (int) $_SESSION["cart"][$key]["qty"] + $qty;
+                    $_SESSION['cart'][$key]['qty'] =
+                        (int) $_SESSION['cart'][$key]['qty'] + $qty;
                     $found = true;
                     break;
                 }
             }
             if (!$found) {
-                $_SESSION["cart"][] = [
-                    "name" => $name,
-                    "price" => $price,
-                    "qty" => $qty,
+                $_SESSION['cart'][] = [
+                    'name' => $name,
+                    'price' => $price,
+                    'qty' => $qty,
                 ];
             }
         }
-    } elseif (isset($_POST["remove"])) {
+    } elseif (isset($_POST['remove'])) {
         // Remove by name (submitted from the single-row form below)
-        $name = isset($_POST["name"]) ? trim($_POST["name"]) : "";
-        if ($name !== "") {
-            foreach ($_SESSION["cart"] as $key => $item) {
-                if (isset($item["name"]) && $item["name"] === $name) {
-                    unset($_SESSION["cart"][$key]);
+        $name = isset($_POST['name']) ? trim($_POST['name']) : '';
+        if ($name !== '') {
+            foreach ($_SESSION['cart'] as $key => $item) {
+                if (isset($item['name']) && $item['name'] === $name) {
+                    unset($_SESSION['cart'][$key]);
                     // reindex to keep array numeric keys contiguous (optional)
-                    $_SESSION["cart"] = array_values($_SESSION["cart"]);
+                    $_SESSION['cart'] = array_values($_SESSION['cart']);
                     break;
                 }
             }
         }
-    } elseif (isset($_POST["checkout"])) {
+    } elseif (isset($_POST['checkout'])) {
         // Clear cart on successful checkout
-        $_SESSION["cart"] = [];
-        $user = isset($_SESSION["user_name"]) ? urlencode($_SESSION["user_name"]) : "Guest";
-        header("Location: product.php?success=1&user=" . $user);
+        $_SESSION['cart'] = [];
+        $user = isset($_SESSION['user_name'])
+            ? urlencode($_SESSION['user_name'])
+            : 'Guest';
+        header('Location: product.php?success=1&user=' . $user);
         exit();
     }
 }
 
-$cart_items = $_SESSION["cart"];
+$cart_items = $_SESSION['cart'];
 ?>
 
 <!DOCTYPE html>
@@ -92,8 +94,8 @@ $cart_items = $_SESSION["cart"];
 <body class="bg-[#121316] text-white min-h-screen flex flex-col justify-between font-sans">
 
     <!--NAVBAR LAYOUT-->
-    <?php require_once $_SERVER["DOCUMENT_ROOT"] .
-        "/IPT-Website/includes/navbar.php"; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] .
+        '/IPT-Website/includes/navbar.php'; ?>
 
     <!--MAIN CONTENT-->
     <main class="w-full max-w-7xl mx-auto px-6 space-y-8 mb-16">
@@ -115,88 +117,90 @@ $cart_items = $_SESSION["cart"];
         <div class="flex flex-col lg:flex-row gap-8 items-start w-full">
 
             <!--FILTER SIDEBAR CONTAINER-->
-            <form class="w-full lg:w-[280px] shrink-0 bg-[#252A2E] border border-gray-800/60 rounded-xl p-6 space-y-6 text-white sticky top-4">
+            <div class="w-full lg:w-[280px] shrink-0 bg-[#252A2E] border border-gray-800/60 rounded-xl p-6 space-y-6 text-white sticky top-4">
 
-                <div class="flex items-center justify-between">
-                    <h2 class="text-lg font-bold tracking-wide text-gray-300">FILTER</h2>
-                    <button type="reset" class="text-sm text-gray-400 hover:text-white">Clear all</button>
-                </div>
-
-                <!--SEARCH LAYOUT-->
-                <div class="relative">
-                    <input type="text" placeholder="Search here" class="w-full bg-[#121316] text-sm text-gray-300
-                    placeholder-gray-500 border border-gray-700/60 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-500">
-                </div>
-
-                <!--PC PARTS SELECTION-->
-                <details class="space-y-3">
-
-                    <summary class="text-base font-extrabold text-gray-300">CATEGORY</summary>
-
-                    <div class="space-y-2.5">
-                        <label class="flex items-center gap-3 text-sm text-gray-200">
-                            <input type="checkbox" name="category" value="cpu" class="w-3.5 h-3.5">
-                            <span>CPU</span>
-                        </label>
-                        <label class="flex items-center gap-3 text-sm text-gray-200">
-                            <input type="checkbox" name="category" value="ram" class="w-3.5 h-3.5">
-                            <span>RAM</span>
-                        </label>
-                        <label class="flex items-center gap-3 text-sm text-gray-200">
-                            <input type="checkbox" name="category" value="gpu" class="w-3.5 h-3.5">
-                            <span>GPU</span>
-                        </label>
-                        <label class="flex items-center gap-3 text-sm text-gray-200">
-                            <input type="checkbox" name="category" value="motherboard" class="w-3.5 h-3.5">
-                            <span>Motherboard</span>
-                        </label>
-                        <label class="flex items-center gap-3 text-sm text-gray-200">
-                            <input type="checkbox" name="category" value="psu" class="w-3.5 h-3.5">
-                            <span>PSU</span>
-                        </label>
-                        <label class="flex items-center gap-3 text-sm text-gray-200">
-                            <input type="checkbox" name="category" value="cooling" class="w-3.5 h-3.5">
-                            <span>Cooling System</span>
-                        </label>
+                <form action="" class="space-y-6">
+                     <div class="flex items-center justify-between">
+                        <h2 class="text-lg font-bold tracking-wide text-gray-300">FILTER</h2>
+                        <button type="reset" class="text-sm text-gray-400 hover:text-white">Clear all</button>
                     </div>
 
-                </details>
-
-                <!--PRICE RANGE SELECTION-->
-                <details class="space-y-3">
-
-                    <summary class="text-base font-extrabold text-gray-300">PRICE RANGE</summary>
-
-                    <div class="space-y-2.5">
-
-                        <label class="flex items-center gap-3 text-sm text-gray-200">
-                            <input type="checkbox" name="price" value="0-1000" class="w-3.5 h-3.5">
-                            <span>Free - ₱1 000</span>
-                        </label>
-                        <label class="flex items-center gap-3 text-sm text-gray-200">
-                            <input type="checkbox" name="price" value="1000-3000" class="w-3.5 h-3.5">
-                            <span>₱1 000 - ₱3 000</span>
-                        </label>
-                        <label class="flex items-center gap-3 text-sm text-gray-200">
-                            <input type="checkbox" name="price" value="3000-5000" class="w-3.5 h-3.5">
-                            <span>₱3 000 - ₱5 000</span>
-                        </label>
-                        <label class="flex items-center gap-3 text-sm text-gray-200">
-                            <input type="checkbox" name="price" value="5000-7000" class="w-3.5 h-3.5">
-                            <span>₱5 000 - ₱7 000</span>
-                        </label>
-                        <label class="flex items-center gap-3 text-sm text-gray-200">
-                            <input type="checkbox" name="price" value="7000-9000" class="w-3.5 h-3.5">
-                            <span>₱7 000 - ₱9 000</span>
-                        </label>
-                        <label class="flex items-center gap-3 text-sm text-gray-200">
-                            <input type="checkbox" name="price" value="9000+" class="w-3.5 h-3.5">
-                            <span>Over ₱9 000</span>
-                        </label>
-
+                    <!--SEARCH LAYOUT-->
+                    <div class="relative">
+                        <input type="text" placeholder="Search here" class="w-full bg-[#121316] text-sm text-gray-300
+                        placeholder-gray-500 border border-gray-700/60 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-500">
                     </div>
 
-                </details>
+                    <!--PC PARTS SELECTION-->
+                    <details class="space-y-3">
+
+                        <summary class="text-base font-extrabold text-gray-300">CATEGORY</summary>
+
+                        <div class="space-y-2.5">
+                            <label class="flex items-center gap-3 text-sm text-gray-200">
+                                <input type="checkbox" name="category" value="cpu" class="w-3.5 h-3.5">
+                                <span>CPU</span>
+                            </label>
+                            <label class="flex items-center gap-3 text-sm text-gray-200">
+                                <input type="checkbox" name="category" value="ram" class="w-3.5 h-3.5">
+                                <span>RAM</span>
+                            </label>
+                            <label class="flex items-center gap-3 text-sm text-gray-200">
+                                <input type="checkbox" name="category" value="gpu" class="w-3.5 h-3.5">
+                                <span>GPU</span>
+                            </label>
+                            <label class="flex items-center gap-3 text-sm text-gray-200">
+                                <input type="checkbox" name="category" value="motherboard" class="w-3.5 h-3.5">
+                                <span>Motherboard</span>
+                            </label>
+                            <label class="flex items-center gap-3 text-sm text-gray-200">
+                                <input type="checkbox" name="category" value="psu" class="w-3.5 h-3.5">
+                                <span>PSU</span>
+                            </label>
+                            <label class="flex items-center gap-3 text-sm text-gray-200">
+                                <input type="checkbox" name="category" value="cooling" class="w-3.5 h-3.5">
+                                <span>Cooling System</span>
+                            </label>
+                        </div>
+
+                    </details>
+
+                    <!--PRICE RANGE SELECTION-->
+                    <details class="space-y-3">
+
+                        <summary class="text-base font-extrabold text-gray-300">PRICE RANGE</summary>
+
+                        <div class="space-y-2.5">
+
+                            <label class="flex items-center gap-3 text-sm text-gray-200">
+                                <input type="checkbox" name="price" value="0-1000" class="w-3.5 h-3.5">
+                                <span>Free - ₱1 000</span>
+                            </label>
+                            <label class="flex items-center gap-3 text-sm text-gray-200">
+                                <input type="checkbox" name="price" value="1000-3000" class="w-3.5 h-3.5">
+                                <span>₱1 000 - ₱3 000</span>
+                            </label>
+                            <label class="flex items-center gap-3 text-sm text-gray-200">
+                                <input type="checkbox" name="price" value="3000-5000" class="w-3.5 h-3.5">
+                                <span>₱3 000 - ₱5 000</span>
+                            </label>
+                            <label class="flex items-center gap-3 text-sm text-gray-200">
+                                <input type="checkbox" name="price" value="5000-7000" class="w-3.5 h-3.5">
+                                <span>₱5 000 - ₱7 000</span>
+                            </label>
+                            <label class="flex items-center gap-3 text-sm text-gray-200">
+                                <input type="checkbox" name="price" value="7000-9000" class="w-3.5 h-3.5">
+                                <span>₱7 000 - ₱9 000</span>
+                            </label>
+                            <label class="flex items-center gap-3 text-sm text-gray-200">
+                                <input type="checkbox" name="price" value="9000+" class="w-3.5 h-3.5">
+                                <span>Over ₱9 000</span>
+                            </label>
+
+                        </div>
+
+                    </details>
+                </form>
 
                 <!--Cart Header + no. of items-->
                 <div class="bg-[#252A2E] border border-gray-800/60 rounded-xl p-6 space-y-4 text-white">
@@ -204,49 +208,52 @@ $cart_items = $_SESSION["cart"];
                         <h2 class="text-lg font-bold tracking-wide text-gray-300">Cart</h2>
                         <span class="text-xs bg-[#121316] px-2 py-1 rounded-full text-gray-400">
                             <?php echo empty($cart_items)
-                                ? "Empty"
-                                : count($cart_items) . " items"; ?>
+                                ? 'Empty'
+                                : count($cart_items) . ' items'; ?>
                         </span>
                     </div>
                 </div>
 
                 <!--Cart Items-->
-                <!--Chore: Fix shit here where first item in cart doesn't work properly-->
                 <div class="space-y-3 text-sm text-gray-400 max-h-64 overflow-y-auto">
 
                     <?php if (!empty($cart_items)): ?>
                         <?php
                         $total_price = 0;
                         foreach ($cart_items as $item) {
-                            if (!empty($item["name"])) {
-                                $total_price += (float)$item["price"] * (int)$item["qty"];
+                            if (!empty($item['name'])) {
+                                $total_price +=
+                                    (float) $item['price'] * (int) $item['qty'];
                             }
                         }
                         ?>
 
                         <div class="flex justify-between items-center pb-2 border-b border-gray-700 text-white font-bold">
                             <span>Total Price:</span>
-                            <span class="text-emerald-400">₱<?php echo number_format($total_price, 2); ?></span>
+                            <span class="text-emerald-400">₱<?php echo number_format(
+                                $total_price,
+                                2,
+                            ); ?></span>
                         </div>
 
 
                         <?php foreach ($cart_items as $key => $item): ?>
-                            <?php if (empty($item["name"])) {
+                            <?php if (empty($item['name'])) {
                                 continue;
                             } ?>
                             <form method="POST" action="product.php" class="flex justify-between items-center bg-[#121316] p-2 rounded-lg text-white">
                                 <div>
                                     <p class="font-semibold">
                                         <?php echo htmlspecialchars(
-                                            $item["name"],
+                                            $item['name'],
                                         ); ?>
                                     </p>
                                     <p class="text-xs text-gray-400">
                                         ₱<?php echo htmlspecialchars(
-                                            $item["price"],
+                                            $item['price'],
                                         ); ?>
                                         x <?php echo htmlspecialchars(
-                                            $item["qty"],
+                                            $item['qty'],
                                         ); ?>
                                     </p>
                                 </div>
@@ -254,11 +261,11 @@ $cart_items = $_SESSION["cart"];
                                     type="hidden"
                                     name="name"
                                     value="<?php echo htmlspecialchars(
-                                        $item["name"],
+                                        $item['name'],
                                     ); ?>"
                                 >
                                     <!--Remove button-->
-                                <input type="submit" name="remove" class="text-red-500 hover:text-red-400 text-xs" value="Remove">
+                                <input type="submit" name="remove" class="text-red-500 hover:text-red-400 text-xs cursor-pointer" value="Remove">
                             </form>
                         <?php endforeach; ?>
 
@@ -278,7 +285,7 @@ $cart_items = $_SESSION["cart"];
 
                 </div>
 
-            </form>
+            </div>
 
             <!--PRODUCTS-->
             <div class="flex-grow w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5"><!--Dont remove it-->
@@ -288,12 +295,12 @@ $cart_items = $_SESSION["cart"];
                 <?php if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
 
-                        $name = htmlspecialchars($row["Product_Name"]);
-                        $desc = htmlspecialchars($row["Product_Desc"]);
-                        $category = htmlspecialchars($row["Product_Category"]);
-                        $price = htmlspecialchars($row["Product_Price"]);
-                        $stock = htmlspecialchars($row["InStock"]);
-                        $image = "../assets/" . htmlspecialchars($row["Image"]);
+                        $name = htmlspecialchars($row['Product_Name']);
+                        $desc = htmlspecialchars($row['Product_Desc']);
+                        $category = htmlspecialchars($row['Product_Category']);
+                        $price = htmlspecialchars($row['Product_Price']);
+                        $stock = htmlspecialchars($row['InStock']);
+                        $image = '../assets/' . htmlspecialchars($row['Image']);
                         ?>
                                     <form method="POST" class="bg-[#252A2E] rounded-xl aspect-[3/4] w-full p-4 flex flex-col justify-between">
                                         <img class="aspect-square object-cover rounded-lg" src="<?= $image ?>" alt="<?= $name ?>">
@@ -331,14 +338,13 @@ $cart_items = $_SESSION["cart"];
 
         </div>
 
-
     </main>
 
     <!--Hanggang dito lang may backend, di kasali footer-->
 
     <!--FOOTER LAYOUT-->
-    <?php require_once $_SERVER["DOCUMENT_ROOT"] .
-        "/IPT-Website/includes/footer.php"; ?>
+    <?php require_once $_SERVER['DOCUMENT_ROOT'] .
+        '/IPT-Website/includes/footer.php'; ?>
 
 </body>
 
