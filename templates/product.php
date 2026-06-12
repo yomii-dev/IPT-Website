@@ -59,7 +59,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif (isset($_POST["checkout"])) {
         // Clear cart on successful checkout
         $_SESSION["cart"] = [];
-        header("Location: product.php?success=1");
+        $user = isset($_SESSION["user_name"]) ? urlencode($_SESSION["user_name"]) : "Guest";
+        header("Location: product.php?success=1&user=" . $user);
         exit();
     }
 }
@@ -76,12 +77,12 @@ $cart_items = $_SESSION["cart"];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>P3R | Product</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!--Attempting to do: show user_name on Thank you message-->  <!--Ts javascript frying me son-->
     <script>
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('success') == '1') {
-                alert('Thank you Ayen!');
+                const username = urlParams.get('user') || 'Customer';
+                alert('Thank you for your purchase ' + decodeURIComponent(username));
                 window.history.replaceState({}, document.title, window.location.pathname);
             }
         });
