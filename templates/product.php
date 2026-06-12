@@ -203,7 +203,7 @@ $cart_items = $_SESSION['cart'];
                 </form>
 
                 <!--Cart Header + no. of items-->
-                <div class="bg-[#252A2E] border border-gray-800/60 rounded-xl p-6 space-y-4 text-white">
+                <div class="bg-[#252A2E] border border-gray-800/60 rounded-xl p-1.5 space-y-6 text-white">
                     <div class="flex items-center justify-between border-b border-gray-700 pb-2">
                         <h2 class="text-lg font-bold tracking-wide text-gray-300">Cart</h2>
                         <span class="text-xs bg-[#121316] px-2 py-1 rounded-full text-gray-400">
@@ -215,8 +215,7 @@ $cart_items = $_SESSION['cart'];
                 </div>
 
                 <!--Cart Items-->
-                <div class="space-y-3 text-sm text-gray-400 max-h-64 overflow-y-auto">
-
+                <div class="space-y-3 text-sm text-gray-400">
                     <?php if (!empty($cart_items)): ?>
                         <?php
                         $total_price = 0;
@@ -227,7 +226,7 @@ $cart_items = $_SESSION['cart'];
                             }
                         }
                         ?>
-
+                        <!--Total Price-->
                         <div class="flex justify-between items-center pb-2 border-b border-gray-700 text-white font-bold">
                             <span>Total Price:</span>
                             <span class="text-emerald-400">₱<?php echo number_format(
@@ -236,38 +235,39 @@ $cart_items = $_SESSION['cart'];
                             ); ?></span>
                         </div>
 
-
-                        <?php foreach ($cart_items as $key => $item): ?>
-                            <?php if (empty($item['name'])) {
-                                continue;
-                            } ?>
-                            <form method="POST" action="product.php" class="flex justify-between items-center bg-[#121316] p-2 rounded-lg text-white">
-                                <div>
-                                    <p class="font-semibold">
-                                        <?php echo htmlspecialchars(
+                        <div class="space-y-3 max-h-48 overflow-y-auto pr-1">
+                            <?php foreach ($cart_items as $key => $item): ?>
+                                <?php if (empty($item['name'])) {
+                                    continue;
+                                } ?>
+                                <form method="POST" action="product.php" class="flex justify-between items-center bg-[#121316] p-2 rounded-lg text-white">
+                                    <div>
+                                        <p class="font-semibold">
+                                            <?php echo htmlspecialchars(
+                                                $item['name'],
+                                            ); ?>
+                                        </p>
+                                        <p class="text-xs text-gray-400">
+                                            ₱<?php echo htmlspecialchars(
+                                                $item['price'],
+                                            ); ?>
+                                            x <?php echo htmlspecialchars(
+                                                $item['qty'],
+                                            ); ?>
+                                        </p>
+                                    </div>
+                                    <input
+                                        type="hidden"
+                                        name="name"
+                                        value="<?php echo htmlspecialchars(
                                             $item['name'],
-                                        ); ?>
-                                    </p>
-                                    <p class="text-xs text-gray-400">
-                                        ₱<?php echo htmlspecialchars(
-                                            $item['price'],
-                                        ); ?>
-                                        x <?php echo htmlspecialchars(
-                                            $item['qty'],
-                                        ); ?>
-                                    </p>
-                                </div>
-                                <input
-                                    type="hidden"
-                                    name="name"
-                                    value="<?php echo htmlspecialchars(
-                                        $item['name'],
-                                    ); ?>"
-                                >
-                                    <!--Remove button-->
-                                <input type="submit" name="remove" class="text-red-500 hover:text-red-400 text-xs cursor-pointer" value="Remove">
-                            </form>
-                        <?php endforeach; ?>
+                                        ); ?>"
+                                    >
+                                        <!--Remove button-->
+                                    <input type="submit" name="remove" class="text-red-500 hover:text-red-400 text-xs cursor-pointer" value="Remove">
+                                </form>
+                            <?php endforeach; ?>
+                        </div>
 
                         <!--CHECKOUT BUTTON-->
                         <!--Chore: add functionality-->
