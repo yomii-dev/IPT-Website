@@ -58,13 +58,13 @@
                     <h3 class="text-3xl font-black text-white">PC Renting</h3>
 
                     <ul class="text-[16px] text-gray-400 space-y-1.5 list-disc list-inside">
-                        <li>Lorem ipsum dolor sit amet</li>
-                        <li>consectetur adipiscing elit sed do</li>
-                        <li>eiusmod tempor incididunt ut labore</li>
-                        <li>et dolore magna aliqua.</li>
-                        <li>Ut enim ad minim veniam, quis nostrud</li>
-                        <li>exercitation ullamco laboris</li>
-                        <li>nisi ut aliquip ex ea commodo consequat</li>
+                        <li>Wide Selection of High-Performance PCs</li>
+                        <li>Flexible Rental Durations</li>
+                        <li>Instant Deployment & Easy Setup</li>
+                        <li>Cost-Effective Alternative to Buying</li>
+                        <li>Regular Maintenance & Support</li>
+                        <li>Upgrade Options Available</li>
+                        <li>Local and Trusted Service</li>
                     </ul>
                     <button class="bg-gray-200 text-black font-bold text-[14px] px-6 py-2 rounded-lg hover:bg-white shadow-sm">
                         Rent
@@ -89,13 +89,13 @@
                     <h3 class="text-3xl font-black text-white">Disk Reformatting</h3>
 
                     <ul class="text-[16px] text-gray-400 space-y-1.5 list-disc list-inside">
-                        <li>Lorem ipsum dolor sit amet</li>
-                        <li>consectetur adipiscing elit sed do</li>
-                        <li>eiusmod tempor incididunt ut labore</li>
-                        <li>et dolore magna aliqua.</li>
-                        <li>Ut enim ad minim veniam, quis nostrud</li>
-                        <li>exercitation ullamco laboris</li>
-                        <li>nisi ut aliquip ex ea commodo consequat</li>
+                        <li>Securely erase data and restore storage devices to factory settings</li>
+                        <li>Free Diagnostic & Transparent Pricing</li>
+                        <li>High Success of Data Recovery Guarantee</li>
+                        <li>Privacy & Security First</li>
+                        <li>Support for All File Types & Systems </li>
+                        <li>Local and Trusted</li>
+                        <li>Prevention & Backup Device</li>
                     </ul>
                     <button class="bg-gray-200 text-black font-bold text-[14px] px-6 py-2 rounded-lg hover:bg-white shadow-sm">
                         Rent
@@ -119,13 +119,13 @@
                     <h3 class="text-3xl font-black text-white">Data Recovery</h3>
 
                     <ul class="text-[16px] text-gray-400 space-y-1.5 list-disc list-inside">
-                        <li>Lorem ipsum dolor sit amet</li>
-                        <li>consectetur adipiscing elit sed do</li>
-                        <li>eiusmod tempor incididunt ut labore</li>
-                        <li>et dolore magna aliqua.</li>
-                        <li>Ut enim ad minim veniam, quis nostrud</li>
-                        <li>exercitation ullamco laboris</li>
-                        <li>nisi ut aliquip ex ea commodo consequat</li>
+                        <li>Fast, secure retrieval of lost files from HDDs, SSDs, USBs, memory cards, and RAID arrays</li>
+                        <li>Free Diagnostic & Transparent Pricing</li>
+                        <li>High Success of Data Recovery Guarantee</li>
+                        <li>Privacy & Security First</li>
+                        <li>Support for All File Types & Systems </li>
+                        <li>Local and Trusted</li>
+                        <li>Prevention & Backup Device</li>
                     </ul>
                     <button class="bg-gray-200 text-black font-bold text-[14px] px-6 py-2 rounded-lg hover:bg-white shadow-sm">
                         Rent
