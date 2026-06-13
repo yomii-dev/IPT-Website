@@ -166,39 +166,48 @@ $cart_items = $_SESSION['cart'];
 
                         <div class="space-y-2.5">
                             <label class="flex items-center gap-3 text-sm text-gray-200">
-                                <input type="checkbox" name="categories[]" value="cpu" class="w-3.5 h-3.5">
+                                <input type="checkbox" name="categories[]" value="cpu" class="w-3.5 h-3.5"
+                                    <?= in_array('cpu', $categories) ? 'checked' : '' ?>>
                                 <span>CPU</span>
                             </label>
                             <label class="flex items-center gap-3 text-sm text-gray-200">
-                                <input type="checkbox" name="categories[]" value="ram" class="w-3.5 h-3.5">
+                                <input type="checkbox" name="categories[]" value="ram" class="w-3.5 h-3.5"
+                                    <?= in_array('ram', $categories) ? 'checked' : '' ?>>
                                 <span>RAM</span>
                             </label>
                             <label class="flex items-center gap-3 text-sm text-gray-200">
-                                <input type="checkbox" name="categories[]" value="gpu" class="w-3.5 h-3.5">
+                                <input type="checkbox" name="categories[]" value="gpu" class="w-3.5 h-3.5"
+                                    <?= in_array('gpu', $categories) ? 'checked' : '' ?>>
                                 <span>GPU</span>
                             </label>
                             <label class="flex items-center gap-3 text-sm text-gray-200">
-                                <input type="checkbox" name="categories[]" value="motherboard" class="w-3.5 h-3.5">
+                                <input type="checkbox" name="categories[]" value="motherboard" class="w-3.5 h-3.5"
+                                    <?= in_array('motherboard', $categories) ? 'checked' : '' ?>>
                                 <span>Motherboard</span>
                             </label>
                             <label class="flex items-center gap-3 text-sm text-gray-200">
-                                <input type="checkbox" name="categories[]" value="psu" class="w-3.5 h-3.5">
+                                <input type="checkbox" name="categories[]" value="psu" class="w-3.5 h-3.5"
+                                    <?= in_array('psu', $categories) ? 'checked' : '' ?>>
                                 <span>PSU</span>
                             </label>
                             <label class="flex items-center gap-3 text-sm text-gray-200">
-                                <input type="checkbox" name="categories[]" value="cooling" class="w-3.5 h-3.5">
+                                <input type="checkbox" name="categories[]" value="cooling" class="w-3.5 h-3.5"
+                                    <?= in_array('cooling', $categories) ? 'checked' : '' ?>>
                                 <span>Cooling System</span>
                             </label>
                             <label class="flex items-center gap-3 text-sm text-gray-200">
-                                <input type="checkbox" name="categories[]" value="peripherals" class="w-3.5 h-3.5">
+                                <input type="checkbox" name="categories[]" value="peripherals" class="w-3.5 h-3.5"
+                                    <?= in_array('peripherals', $categories) ? 'checked' : '' ?>>
                                 <span>Peripherals</span>
                             </label>
                             <label class="flex items-center gap-3 text-sm text-gray-200">
-                                <input type="checkbox" name="categories[]" value="thermal paste" class="w-3.5 h-3.5">
+                                <input type="checkbox" name="categories[]" value="thermal paste" class="w-3.5 h-3.5"
+                                    <?= in_array('thermal paste', $categories) ? 'checked' : '' ?>>
                                 <span>Thermal Paste</span>
                             </label>
                             <label class="flex items-center gap-3 text-sm text-gray-200">
-                                <input type="checkbox" name="categories[]" value="bundle" class="w-3.5 h-3.5">
+                                <input type="checkbox" name="categories[]" value="bundle" class="w-3.5 h-3.5"
+                                    <?= in_array('bundle', $categories) ? 'checked' : '' ?>>
                                 <span>Bundle</span>
                             </label>
                         </div>
