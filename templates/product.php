@@ -2,6 +2,7 @@
 <?php
 session_start();
 $page = 'Products';
+$categories = $_GET['categories'] ? $_GET['categories'] : [];
 
 // ensure cart exists
 if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart'])) {
@@ -19,8 +20,6 @@ try {
         $query = 'SELECT * FROM ProductsInfo WHERE 1=1';
         $params = [];
         $types = '';
-
-        $categories = $_GET['categories'];
 
         // make those placeholder (?, ?, ?)
         $placeholders = implode(',', array_fill(0, count($categories), '?'));
@@ -150,7 +149,7 @@ $cart_items = $_SESSION['cart'];
                 <form action="product.php" method="GET" class="space-y-6">
                      <div class="flex items-center justify-between">
                         <h2 class="text-lg font-bold tracking-wide text-gray-300">FILTER</h2>
-                        <button type="reset" class="text-sm text-gray-400 hover:text-white">Clear all</button>
+                        <a class="text-sm text-gray-400 hover:text-white" href="product.php">Clear all</a>
                     </div>
 
                     <!--SEARCH LAYOUT-->
