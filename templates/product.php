@@ -251,7 +251,12 @@ $cart_items = $_SESSION['cart'];
                     </details>
 
                     <!--Chore: make this prettier lmaoaoa-->
-                    <input type="submit" value="Apply Filters">
+                    <button type="submit" class="w-full relative group overflow-hidden rounded-lg p-[1px] focus:outline-none cursor-pointer font-mono font-bold">
+                        <span class="absolute inset-0 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 rounded-lg uppercase tracking-wider font-semibold opacity-70 group-hover:opacity-100 transition duration-300"></span>
+                        <span class="relative block px-4 py-2.5 rounded-[7px] bg-[#121316] text-sm text-gray-200 font-bold tracking-wider uppercase text-center transition dynamic-gradient group-hover:bg-transparent group-hover:text-white duration-300">
+                            Apply Filters
+                        </span>
+                    </button>
                 </form>
 
                 <!--Cart Header + no. of items-->
@@ -325,9 +330,12 @@ $cart_items = $_SESSION['cart'];
                         <!--Chore: add functionality-->
                          <div class="pt-2 border-t border-gray-700/50">
                             <form method="POST" action="product.php">
-                                <button type="submit" name="checkout" class="w-full bg-blue-600 hover:bg-emerald-500 text-white font-bold
-                                py-2 px-4 rounded-lg text-center transition cursor-pointer text-sm">
-                                Checkout
+                                <button type="submit" name="checkout" class="w-full relative group overflow-hidden bg-transparent border-emerald-500 
+                                text-emerald-400 font-mono font-bold py-2.5 px-4 rounded-lg text-center tracking-widest uppercase transition duration-300 cursor-pointer text-sm shadow-gray-500 hover:shadow-gray-700">
+                                    <span class="absolute inset-0 w-full h-full bg-emerald-500 -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out -z-10"></span>
+                                    <span class="relative group-hover:text-[#121316] flex items-center justify-center gap-2">
+                                        Checkout
+                                    </span>
                                 </button>
                             </form>
                          </div>
