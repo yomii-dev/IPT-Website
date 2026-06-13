@@ -144,7 +144,7 @@ $cart_items = $_SESSION['cart'];
         <div class="flex flex-col lg:flex-row gap-8 items-start w-full">
 
             <!--FILTER SIDEBAR CONTAINER-->
-            <div class="w-full lg:w-[280px] shrink-0 bg-[#252A2E] border border-gray-800/60 rounded-xl p-6 space-y-6 text-white sticky top-4 max-h-dvh">
+            <div class="w-full lg:w-[280px] shrink-0 bg-[#252A2E] border border-gray-800/60 rounded-xl p-6 space-y-6 text-white sticky top-4 max-h-dvh overflow-y-auto">
 
                 <form action="product.php" method="GET" class="space-y-6">
                      <div class="flex items-center justify-between">
@@ -159,7 +159,7 @@ $cart_items = $_SESSION['cart'];
                     </div>
 
                     <!--PC PARTS SELECTION-->
-                    <details class="space-y-3" open>
+                    <details class="space-y-3 cursor-pointer select-none" open>
 
                         <summary class="text-base font-extrabold text-gray-300">CATEGORY</summary>
 
@@ -215,7 +215,7 @@ $cart_items = $_SESSION['cart'];
 
                     <!--PRICE RANGE SELECTION-->
                     <!--Chore: Tweak price ranges-->
-                    <details class="space-y-3">
+                    <details class="space-y-3 cursor-pointer select-none">
 
                         <summary class="text-base font-extrabold text-gray-300">PRICE RANGE</summary>
 
