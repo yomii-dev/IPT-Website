@@ -1,5 +1,18 @@
 <!--SERVICE PAGE-->
-<?php $page = 'Service'; ?>
+<?php 
+session_start();
+if (!isset($_SESSION['user_email'])) {
+    // fallback: accept cookie-based login for backward compatibility
+    if (isset($_COOKIE['login']) && $_COOKIE['login'] !== '') {
+        // set session from cookie
+        $_SESSION['user_email'] = $_COOKIE['login'];
+    } else {
+        header('Location: login.php');
+        exit();
+    }
+}
+$page = 'Service';
+?>
 <!DOCTYPE html>
 
 <html lang="en">

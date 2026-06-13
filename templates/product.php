@@ -1,6 +1,16 @@
 <!--PRODUCT PAGE-->
 <?php
 session_start();
+if (!isset($_SESSION['user_email'])) {
+    // fallback: accept cookie-based login for backward compatibility
+    if (isset($_COOKIE['login']) && $_COOKIE['login'] !== '') {
+        // set session from cookie
+        $_SESSION['user_email'] = $_COOKIE['login'];
+    } else {
+        header('Location: login.php');
+        exit();
+    }
+}
 $page = 'Products';
 $categories = isset($_GET['categories']) && is_array($_GET['categories'])
     ? $_GET['categories']
@@ -168,7 +178,17 @@ $cart_items = $_SESSION['cart'];
         <!--PRODUCT CARD LAYOUT-->
         <div class="flex flex-col lg:flex-row gap-8 items-start w-full">
 
-            <!--FILTER SIDEBAR CONTAINER-->
+            <!--FILTER SIDEBAR CONTif (!isset($_SESSION['user_email'])) {
+    // fallback: accept cookie-based login for backward compatibility
+    if (isset($_COOKIE['login']) && $_COOKIE['login'] !== '') {
+        // set session from cookie
+        $_SESSION['user_email'] = $_COOKIE['login'];
+    } else {
+        header('Location: login.php');
+        exit();
+    }
+}
+AINER-->
             <div class="w-full lg:w-[280px] shrink-0 bg-[#252A2E] border border-gray-800/60 rounded-xl p-6 space-y-6 text-white sticky top-4 max-h-dvh overflow-y-auto">
 
                 <form action="product.php" method="GET" class="space-y-6">
