@@ -2,7 +2,19 @@
 <?php
 session_start();
 $page = 'Products';
-$categories = isset($_GET['categories']) ? $_GET['categories'] : [];
+$categories = isset($_GET['categories']) && is_array($_GET['categories'])
+    ? $_GET['categories']
+    : [];
+$lowestPrice = isset($_GET['lowest_price']) && $_GET['lowest_price'] !== ''
+    ? (float) $_GET['lowest_price']
+    : null;
+$highestPrice = isset($_GET['highest_price']) && $_GET['highest_price'] !== ''
+    ? (float) $_GET['highest_price']
+    : null;
+
+if ($lowestPrice !== null && $highestPrice !== null && $lowestPrice > $highestPrice) {
+    [$lowestPrice, $highestPrice] = [$highestPrice, $lowestPrice];
+}
 
 // ensure cart exists
 if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart'])) {
@@ -13,28 +25,41 @@ if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart'])) {
 try {
     $conn = require_once '../includes/mysqli.inc.php';
 
-    if (empty($_GET['categories'])) {
-        $query = 'SELECT * FROM ProductsInfo';
-        $result = $conn->query($query);
-    } elseif (!empty($_GET['categories']) && is_array($_GET['categories'])) {
-        $query = 'SELECT * FROM ProductsInfo WHERE 1=1';
-        $params = [];
-        $types = '';
+    $query = 'SELECT * FROM ProductsInfo WHERE 1=1';
+    $params = [];
+    $types = '';
 
-        // make those placeholder (?, ?, ?)
+    if (!empty($categories)) {
         $placeholders = implode(',', array_fill(0, count($categories), '?'));
         $query .= " AND Product_Category IN ($placeholders)";
+        $types .= str_repeat('s', count($categories));
+        $params = array_merge($params, $categories);
+    }
 
-        // make the `ssssss`
-        $types = str_repeat('s', count($categories));
-        $params = $categories;
+    if ($lowestPrice !== null && $highestPrice !== null) {
+        $query .= ' AND Product_Price BETWEEN ? AND ?';
+        $types .= 'dd';
+        $params[] = $lowestPrice;
+        $params[] = $highestPrice;
+    } elseif ($lowestPrice !== null) {
+        $query .= ' AND Product_Price >= ?';
+        $types .= 'd';
+        $params[] = $lowestPrice;
+    } elseif ($highestPrice !== null) {
+        $query .= ' AND Product_Price <= ?';
+        $types .= 'd';
+        $params[] = $highestPrice;
+    }
 
+    if (empty($params)) {
+        $result = $conn->query('SELECT * FROM ProductsInfo');
+    } else {
         $stmt = $conn->prepare($query);
-
-        if (!empty($params)) {
-            $stmt->bind_param($types, ...$params);
+        $bindParams = [$types];
+        foreach ($params as $index => $value) {
+            $bindParams[] = &$params[$index];
         }
-
+        call_user_func_array([$stmt, 'bind_param'], $bindParams);
         $stmt->execute();
         $result = $stmt->get_result();
     }
@@ -214,38 +239,35 @@ $cart_items = $_SESSION['cart'];
                     </details>
 
                     <!--PRICE RANGE SELECTION-->
-                    <!--Chore: Tweak price ranges-->
                     <details class="space-y-3 cursor-pointer select-none">
 
                         <summary class="text-base font-extrabold text-gray-300">PRICE RANGE</summary>
 
-                        <div class="space-y-2.5">
-
-                            <label class="flex items-center gap-3 text-sm text-gray-200">
-                                <input type="checkbox" name="price" value="0-1000" class="w-3.5 h-3.5">
-                                <span>Free - ₱1 000</span>
+                        <div class="space-y-3">
+                            <label class="block">
+                                <span class="mb-1.5 block text-sm text-gray-300">Lowest price</span>
+                                <input
+                                    type="number"
+                                    name="lowest_price"
+                                    min="0"
+                                    step="0.01"
+                                    value="<?= htmlspecialchars((string) ($lowestPrice ?? '')) ?>"
+                                    placeholder="Min price"
+                                    class="w-full bg-[#121316] text-sm text-gray-300 placeholder-gray-500 border border-gray-700/60 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-500"
+                                >
                             </label>
-                            <label class="flex items-center gap-3 text-sm text-gray-200">
-                                <input type="checkbox" name="price" value="1000-3000" class="w-3.5 h-3.5">
-                                <span>₱1 000 - ₱3 000</span>
+                            <label class="block">
+                                <span class="mb-1.5 block text-sm text-gray-300">Highest price</span>
+                                <input
+                                    type="number"
+                                    name="highest_price"
+                                    min="0"
+                                    step="0.01"
+                                    value="<?= htmlspecialchars((string) ($highestPrice ?? '')) ?>"
+                                    placeholder="Max price"
+                                    class="w-full bg-[#121316] text-sm text-gray-300 placeholder-gray-500 border border-gray-700/60 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-500"
+                                >
                             </label>
-                            <label class="flex items-center gap-3 text-sm text-gray-200">
-                                <input type="checkbox" name="price" value="3000-5000" class="w-3.5 h-3.5">
-                                <span>₱3 000 - ₱5 000</span>
-                            </label>
-                            <label class="flex items-center gap-3 text-sm text-gray-200">
-                                <input type="checkbox" name="price" value="5000-7000" class="w-3.5 h-3.5">
-                                <span>₱5 000 - ₱7 000</span>
-                            </label>
-                            <label class="flex items-center gap-3 text-sm text-gray-200">
-                                <input type="checkbox" name="price" value="7000-9000" class="w-3.5 h-3.5">
-                                <span>₱7 000 - ₱9 000</span>
-                            </label>
-                            <label class="flex items-center gap-3 text-sm text-gray-200">
-                                <input type="checkbox" name="price" value="9000+" class="w-3.5 h-3.5">
-                                <span>Over ₱9 000</span>
-                            </label>
-
                         </div>
 
                     </details>
