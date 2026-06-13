@@ -2,7 +2,7 @@
 <?php
 session_start();
 $page = 'Products';
-$categories = $_GET['categories'] ? $_GET['categories'] : [];
+$categories = isset($_GET['categories']) ? $_GET['categories'] : [];
 
 // ensure cart exists
 if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart'])) {
