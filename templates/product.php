@@ -12,17 +12,28 @@ if (!isset($_SESSION['user_email'])) {
     }
 }
 $page = 'Products';
-$categories = isset($_GET['categories']) && is_array($_GET['categories'])
-    ? $_GET['categories']
-    : [];
-$lowestPrice = isset($_GET['lowest_price']) && $_GET['lowest_price'] !== ''
-    ? (float) $_GET['lowest_price']
-    : null;
-$highestPrice = isset($_GET['highest_price']) && $_GET['highest_price'] !== ''
-    ? (float) $_GET['highest_price']
-    : null;
 
-if ($lowestPrice !== null && $highestPrice !== null && $lowestPrice > $highestPrice) {
+// Filters
+$categories =
+    isset($_GET['categories']) && is_array($_GET['categories'])
+        ? $_GET['categories']
+        : [];
+$lowestPrice =
+    isset($_GET['lowest_price']) && $_GET['lowest_price'] !== ''
+        ? (float) $_GET['lowest_price']
+        : null;
+$highestPrice =
+    isset($_GET['highest_price']) && $_GET['highest_price'] !== ''
+        ? (float) $_GET['highest_price']
+        : null;
+
+$keyword = isset($_GET['search']) ? strtolower($_GET['search']) : null;
+
+if (
+    $lowestPrice !== null &&
+    $highestPrice !== null &&
+    $lowestPrice > $highestPrice
+) {
     [$lowestPrice, $highestPrice] = [$highestPrice, $lowestPrice];
 }
 
@@ -38,6 +49,12 @@ try {
     $query = 'SELECT * FROM ProductsInfo WHERE 1=1';
     $params = [];
     $types = '';
+
+    if (!empty($keyword)) {
+        $query .= " AND LOWER(Product_Name) LIKE ?";
+        $types .= 's';
+        $params[] = '%' . $keyword . '%';
+    }
 
     if (!empty($categories)) {
         $placeholders = implode(',', array_fill(0, count($categories), '?'));
@@ -199,8 +216,12 @@ AINER-->
 
                     <!--SEARCH LAYOUT-->
                     <div class="relative">
-                        <input type="text" placeholder="Search here" class="w-full bg-[#121316] text-sm text-gray-300
-                        placeholder-gray-500 border border-gray-700/60 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-500">
+                        <input
+                            type="text"
+                            placeholder="Search here"
+                            name="search"
+                            value="<?= !empty($keyword) ? $keyword : '' ?>"
+                            class="w-full bg-[#121316] text-sm text-gray-300 placeholder-gray-500 border border-gray-700/60 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-500">
                     </div>
 
                     <!--PC PARTS SELECTION-->
@@ -211,47 +232,65 @@ AINER-->
                         <div class="space-y-2.5">
                             <label class="flex items-center gap-3 text-sm text-gray-200">
                                 <input type="checkbox" name="categories[]" value="cpu" class="w-3.5 h-3.5"
-                                    <?= in_array('cpu', $categories) ? 'checked' : '' ?>>
+                                    <?= in_array('cpu', $categories)
+                                        ? 'checked'
+                                        : '' ?>>
                                 <span>CPU</span>
                             </label>
                             <label class="flex items-center gap-3 text-sm text-gray-200">
                                 <input type="checkbox" name="categories[]" value="ram" class="w-3.5 h-3.5"
-                                    <?= in_array('ram', $categories) ? 'checked' : '' ?>>
+                                    <?= in_array('ram', $categories)
+                                        ? 'checked'
+                                        : '' ?>>
                                 <span>RAM</span>
                             </label>
                             <label class="flex items-center gap-3 text-sm text-gray-200">
                                 <input type="checkbox" name="categories[]" value="gpu" class="w-3.5 h-3.5"
-                                    <?= in_array('gpu', $categories) ? 'checked' : '' ?>>
+                                    <?= in_array('gpu', $categories)
+                                        ? 'checked'
+                                        : '' ?>>
                                 <span>GPU</span>
                             </label>
                             <label class="flex items-center gap-3 text-sm text-gray-200">
                                 <input type="checkbox" name="categories[]" value="motherboard" class="w-3.5 h-3.5"
-                                    <?= in_array('motherboard', $categories) ? 'checked' : '' ?>>
+                                    <?= in_array('motherboard', $categories)
+                                        ? 'checked'
+                                        : '' ?>>
                                 <span>Motherboard</span>
                             </label>
                             <label class="flex items-center gap-3 text-sm text-gray-200">
                                 <input type="checkbox" name="categories[]" value="psu" class="w-3.5 h-3.5"
-                                    <?= in_array('psu', $categories) ? 'checked' : '' ?>>
+                                    <?= in_array('psu', $categories)
+                                        ? 'checked'
+                                        : '' ?>>
                                 <span>PSU</span>
                             </label>
                             <label class="flex items-center gap-3 text-sm text-gray-200">
                                 <input type="checkbox" name="categories[]" value="cooling" class="w-3.5 h-3.5"
-                                    <?= in_array('cooling', $categories) ? 'checked' : '' ?>>
+                                    <?= in_array('cooling', $categories)
+                                        ? 'checked'
+                                        : '' ?>>
                                 <span>Cooling System</span>
                             </label>
                             <label class="flex items-center gap-3 text-sm text-gray-200">
                                 <input type="checkbox" name="categories[]" value="peripherals" class="w-3.5 h-3.5"
-                                    <?= in_array('peripherals', $categories) ? 'checked' : '' ?>>
+                                    <?= in_array('peripherals', $categories)
+                                        ? 'checked'
+                                        : '' ?>>
                                 <span>Peripherals</span>
                             </label>
                             <label class="flex items-center gap-3 text-sm text-gray-200">
                                 <input type="checkbox" name="categories[]" value="thermal paste" class="w-3.5 h-3.5"
-                                    <?= in_array('thermal paste', $categories) ? 'checked' : '' ?>>
+                                    <?= in_array('thermal paste', $categories)
+                                        ? 'checked'
+                                        : '' ?>>
                                 <span>Thermal Paste</span>
                             </label>
                             <label class="flex items-center gap-3 text-sm text-gray-200">
                                 <input type="checkbox" name="categories[]" value="bundle" class="w-3.5 h-3.5"
-                                    <?= in_array('bundle', $categories) ? 'checked' : '' ?>>
+                                    <?= in_array('bundle', $categories)
+                                        ? 'checked'
+                                        : '' ?>>
                                 <span>Bundle</span>
                             </label>
                         </div>
@@ -271,7 +310,9 @@ AINER-->
                                     name="lowest_price"
                                     min="0"
                                     step="0.01"
-                                    value="<?= htmlspecialchars((string) ($lowestPrice ?? '')) ?>"
+                                    value="<?= htmlspecialchars(
+                                        (string) ($lowestPrice ?? ''),
+                                    ) ?>"
                                     placeholder="Min price"
                                     class="w-full bg-[#121316] text-sm text-gray-300 placeholder-gray-500 border border-gray-700/60 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-500"
                                 >
@@ -283,7 +324,9 @@ AINER-->
                                     name="highest_price"
                                     min="0"
                                     step="0.01"
-                                    value="<?= htmlspecialchars((string) ($highestPrice ?? '')) ?>"
+                                    value="<?= htmlspecialchars(
+                                        (string) ($highestPrice ?? ''),
+                                    ) ?>"
                                     placeholder="Max price"
                                     class="w-full bg-[#121316] text-sm text-gray-300 placeholder-gray-500 border border-gray-700/60 rounded-lg px-3 py-2 focus:outline-none focus:border-gray-500"
                                 >
@@ -372,7 +415,7 @@ AINER-->
                         <!--Chore: add functionality-->
                          <div class="pt-2 border-t border-gray-700/50">
                             <form method="POST" action="product.php">
-                                <button type="submit" name="checkout" class="w-full relative group overflow-hidden bg-transparent border-emerald-500 
+                                <button type="submit" name="checkout" class="w-full relative group overflow-hidden bg-transparent border-emerald-500
                                 text-emerald-400 font-mono font-bold py-2.5 px-4 rounded-lg text-center tracking-widest uppercase transition duration-300 cursor-pointer text-sm shadow-gray-500 hover:shadow-gray-700">
                                     <span class="absolute inset-0 w-full h-full bg-emerald-500 -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out -z-10"></span>
                                     <span class="relative group-hover:text-[#121316] flex items-center justify-center gap-2">
