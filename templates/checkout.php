@@ -25,17 +25,19 @@ $est_delivery = date('Y-m-d', strtotime('+3 days'));
 </head>
 <body class="bg-[#121316] text-white min-h-screen flex flex-col justify-between font-sans">
 
+    <!-- Navbar -->
     <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/IPT-Website/includes/navbar.php'; ?>
 
     <main class="w-full max-w-3xl mx-auto px-6 py-8 mb-10">
-        
+
+    <!-- Payment details -->
+    <form action="payment_details.php" method="POST" class="space-y-6">
+
         <div class="bg-[#252A2E] rounded-xl p-8 space-y-6 shadow-xl">
             <h1 class="text-3xl font-black text-white uppercase tracking-wide border-b border-gray-700 pb-4">
                 Checkout Details
             </h1>
 
-            <form action="process_checkout.php" method="POST" class="space-y-6">
-                
                 <!--Shipping-->
                 <div class="space-y-4">
                     <h2 class="text-sm font-bold text-gray-400 uppercase tracking-wider">Shipping Address</h2>
@@ -165,8 +167,7 @@ $est_delivery = date('Y-m-d', strtotime('+3 days'));
                             <option value="GCash">GCash</option>
                             <option value="Paymaya">Paymaya</option>
                             <option value="Card">Credit / Debit Card</option>
-                            <option value="Ayen">A.Y.E.N</option>
-                            <option value="Utang">Utang muna sa Bumbay</option>
+                            <option value="PayPal">Paypal</option>
                         </select>
                     </div>
                     <div>
@@ -185,15 +186,19 @@ $est_delivery = date('Y-m-d', strtotime('+3 days'));
                         <input type="hidden" name="order_date" value="<?php echo $order_date; ?>">
                     </div>
                     <div>
-                        <span class="block text-xs font-semibold text-gray-400 uppercase mb-1">Est. Delivery</span>
+                        <span class="block text-xs font-semibold text-gray-400 uppercase mb-1">Estimated Delivery</span>
                         <span class="text-lg font-mono font-bold text-gray-300"><?php echo $est_delivery; ?></span>
                         <input type="hidden" name="estimated_delivery" value="<?php echo $est_delivery; ?>">
                     </div>
                 </div>
 
+                <!-- Just jarvis the arrow icon lmao -->
                 <button type="submit" 
-                    class="w-full bg-transparent border border-gray-700 font-bold text-[14px] uppercase tracking-wider py-3.5 rounded-lg text-gray-300 hover:text-white hover:border-white transition cursor-pointer">
-                    Place Order
+                    class="w-full bg-transparent border border-gray-700 font-bold text-[14px] uppercase tracking-wider py-3.5 rounded-lg text-gray-300 hover:text-white hover:border-white transition cursor-pointer flex items-center justify-center gap-2 group">
+                    <span>Proceed to Payment</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 transform transition-transform duration-200 group-hover:translate-x-1">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                    </svg>
                 </button>
 
             </form>
