@@ -1,4 +1,5 @@
 <?php
+session_start();
 $page = 'Rental';
 ?>
 <!DOCTYPE html>
@@ -20,7 +21,7 @@ $page = 'Rental';
 
     <!--MAIN CONTAINER-->
 
-    
+
 
     <!--FOOTER LAYOUT-->
 
