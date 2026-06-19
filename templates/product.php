@@ -88,6 +88,7 @@ try {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (isset($_POST['cart'])) {
     // sanitize / cast inputs
+    $id = isset($_POST['id']) ? trim($_POST['id']) : '';
     $name = isset($_POST['name']) ? trim($_POST['name']) : '';
     $qty = isset($_POST['qty']) ? (int) $_POST['qty'] : 0;
     $price = isset($_POST['price']) ? (float) $_POST['price'] : 0.0;
@@ -106,6 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       }
       if (!$found) {
         $_SESSION['cart'][] = [
+          'id' => $id,
           'name' => $name,
           'price' => $price,
           'qty' => $qty,
@@ -128,8 +130,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   } elseif (isset($_POST['checkout'])) {
     // Clear cart on successful checkout
     $_SESSION['cart'] = [];
-    $user = isset($_SESSION['user_name'])
-      ? urlencode($_SESSION['user_name'])
+    $user = isset($_SESSION['Username'])
+      ? urlencode($_SESSION['Username'])
       : 'Guest';
     header('Location: product.php?success=1&user=' . $user);
     die();
@@ -392,6 +394,7 @@ para hindi na sa code nito mageedit just like what sir revealed to us last 3 wee
 <?php if ($result->num_rows > 0) {
   while ($row = $result->fetch_assoc()) {
 
+    $id = intval($row['Product_Id']);
     $name = htmlspecialchars($row['Product_Name']);
     $desc = htmlspecialchars($row['Product_Desc']);
     $category = htmlspecialchars($row['Product_Category']);
@@ -406,7 +409,7 @@ para hindi na sa code nito mageedit just like what sir revealed to us last 3 wee
   <p class="text-emerald-400 font-semibold">₱<?= $price ?></p>
   <p class="text-xs text-gray-400">Stock: <?= $stock ?></p>
 </div>
-<?php if (isset($_SESSION['user_id'])): ?>
+<?php if (isset($_SESSION['User_Id'])): ?>
 <div class="mt-4 space-y-2">
 <input
 type="number"
@@ -416,6 +419,7 @@ min="1"
 max="<?= $stock ?>"
 class="w-full bg-[#121316] text-white border border-gray-700 rounded p-1 text-center"
 >
+<input type="hidden" name="id" value="<?= $id ?>">
 <input type="hidden" name="name" value="<?= $name ?>">
 <input type="hidden" name="price" value="<?= $price ?>">
 <input

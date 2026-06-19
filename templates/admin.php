@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user_email'])) {
+if (!isset($_SESSION['Email'])) {
     if (isset($_COOKIE['login']) && $_COOKIE['login'] !== '') {
-        $_SESSION['user_email'] = $_COOKIE['login'];
+        $_SESSION['Email'] = $_COOKIE['login'];
     } else {
         header('Location: login.php');
         exit();
@@ -12,18 +12,18 @@ if (!isset($_SESSION['user_email'])) {
 
 $conn = require_once $_SERVER['DOCUMENT_ROOT'] . '/IPT-Website/includes/mysqli.inc.php';
 
-if (!isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
+if (!isset($_SESSION['User_Id']) && isset($_SESSION['Email'])) {
     $userStmt = $conn->prepare('SELECT Id FROM UserAccounts WHERE Email = ? LIMIT 1');
-    $userStmt->bind_param('s', $_SESSION['user_email']);
+    $userStmt->bind_param('s', $_SESSION['Email']);
     $userStmt->execute();
     $userResult = $userStmt->get_result();
     if ($userRow = $userResult->fetch_assoc()) {
-        $_SESSION['user_id'] = (int) $userRow['Id'];
+        $_SESSION['User_Id'] = (int) $userRow['Id'];
     }
     $userStmt->close();
 }
 
-if ((int) ($_SESSION['user_id'] ?? 0) !== 1) {
+if ((int) ($_SESSION['User_Id'] ?? 0) !== 1) {
     header('Location: index.php');
     exit();
 }

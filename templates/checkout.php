@@ -1,8 +1,8 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_email'])) {
+if (!isset($_SESSION['Email'])) {
     if (isset($_COOKIE['login']) && $_COOKIE['login'] !== '') {
-        $_SESSION['user_email'] = $_COOKIE['login'];
+        $_SESSION['Email'] = $_COOKIE['login'];
     } else {
         header('Location: login.php');
         exit();
@@ -11,6 +11,7 @@ if (!isset($_SESSION['user_email'])) {
 $page = 'Checkout';
 
 // Date or some shit
+date_default_timezone_set('Asia/Manila');
 $order_date = date('Y-m-d');
 $est_delivery = date('Y-m-d', strtotime('+3 days'));
 ?>
@@ -41,16 +42,16 @@ $est_delivery = date('Y-m-d', strtotime('+3 days'));
                 <!--Shipping-->
                 <div class="space-y-4">
                     <h2 class="text-sm font-bold text-gray-400 uppercase tracking-wider">Shipping Address</h2>
-                    
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Street</label>
-                            <input type="text" name="street" required 
+                            <input type="text" name="street" required
                                 class="w-full bg-[#121316] border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-white transition">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Barangay</label>
-                            <input type="text" name="barangay" required 
+                            <input type="text" name="barangay" required
                                 class="w-full bg-[#121316] border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-white transition">
                         </div>
                     </div>
@@ -58,12 +59,12 @@ $est_delivery = date('Y-m-d', strtotime('+3 days'));
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">City</label>
-                            <input type="text" name="city" required 
+                            <input type="text" name="city" required
                                 class="w-full bg-[#121316] border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-white transition">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Province</label>
-                            <select name="province" required 
+                            <select name="province" required
                                 class="w-full bg-[#121316] border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-white transition">
                                 <option value="" disabled selected>Select Province</option>
                                 <option value="Abra">Abra</option>
@@ -161,7 +162,7 @@ $est_delivery = date('Y-m-d', strtotime('+3 days'));
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Payment Method</label>
-                        <select name="payment_method" 
+                        <select name="payment_method"
                             class="w-full bg-[#121316] border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-white transition">
                             <option value="COD">Cash on Delivery (COD)</option>
                             <option value="GCash">GCash</option>
@@ -173,7 +174,7 @@ $est_delivery = date('Y-m-d', strtotime('+3 days'));
                     <div>
                         <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Payment Status</label>
                         <input type="hidden" name="payment_status" value="Pending">
-                        <input type="text" value="Pending" disabled 
+                        <input type="text" value="Pending" disabled
                             class="w-full bg-[#121316]/50 border border-gray-800 text-gray-500 rounded-lg px-4 py-2.5 font-bold cursor-not-allowed">
                     </div>
                 </div>
@@ -193,7 +194,7 @@ $est_delivery = date('Y-m-d', strtotime('+3 days'));
                 </div>
 
                 <!-- Just jarvis the arrow icon lmao -->
-                <button type="submit" 
+                <button type="submit"
                     class="w-full bg-transparent border border-gray-700 font-bold text-[14px] uppercase tracking-wider py-3.5 rounded-lg text-gray-300 hover:text-white hover:border-white transition cursor-pointer flex items-center justify-center gap-2 group">
                     <span>Proceed to Payment</span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 transform transition-transform duration-200 group-hover:translate-x-1">

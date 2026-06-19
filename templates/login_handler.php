@@ -48,9 +48,9 @@ if (password_verify($pass, $user['User_Pass'])) {
     $updateStmt->execute();
     $updateStmt->close();
 
-    $_SESSION['user_id'] = $user['User_Id'];
-    $_SESSION['user_email'] = $user['Email'];
-    $_SESSION['user_name'] = $user['Username'];
+    $_SESSION['User_Id'] = $user['User_Id'];
+    $_SESSION['Email'] = $user['Email'];
+    $_SESSION['Username'] = $user['Username'];
     setcookie('login', $user['Email'], time() + 60 * 60 * 24, '/');
     header('Location: index.php');
     exit();

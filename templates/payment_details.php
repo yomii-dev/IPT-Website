@@ -1,8 +1,8 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_email'])) {
+if (!isset($_SESSION['Email'])) {
     if (isset($_COOKIE['login']) && $_COOKIE['login'] !== '') {
-        $_SESSION['user_email'] = $_COOKIE['login'];
+        $_SESSION['Email'] = $_COOKIE['login'];
     } else {
         header('Location: login.php');
         exit();
@@ -47,7 +47,7 @@ if (!empty($_SESSION['cart'])) {
     <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/IPT-Website/includes/navbar.php'; ?>
 
     <main class="w-full max-w-3xl mx-auto px-6 py-8 mb-10 flex flex-col gap-6">
-        
+
         <div class="bg-[#252A2E] rounded-xl p-6 shadow-xl border border-gray-800/40 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
                 <h2 class="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Amount Due</h2>
@@ -67,7 +67,7 @@ if (!empty($_SESSION['cart'])) {
             </h1>
 
             <form action="process_order.php" method="POST" class="space-y-6">
-                
+
                 <input type="hidden" name="street" value="<?php echo $street; ?>">
                 <input type="hidden" name="barangay" value="<?php echo $barangay; ?>">
                 <input type="hidden" name="city" value="<?php echo $city; ?>">
@@ -83,11 +83,11 @@ if (!empty($_SESSION['cart'])) {
                         <div class="bg-[#121316] border border-gray-700 rounded-xl p-4 text-center space-y-2">
                             <p class="text-sm text-gray-400 font-medium">Scan to pay using your mobile wallet app</p>
                             <div class="w-40 h-40 bg-white mx-auto rounded-lg flex items-center justify-center p-2">
-                                
-                                <img src="../assets/clueless.png" 
-                                    alt="Payment QR Code" 
+
+                                <img src="../assets/clueless.png"
+                                    alt="Payment QR Code"
                                     class="w-full h-full object-contain">
-                                    
+
                             </div>
                             <p class="text-xs text-gray-500 italic">Merchant Reference: P3R-<?php echo time(); ?></p>
                         </div>
@@ -95,12 +95,12 @@ if (!empty($_SESSION['cart'])) {
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Account Number / Phone</label>
-                                <input type="text" name="account_number" placeholder="09XXXXXXXXX" required 
+                                <input type="text" name="account_number" placeholder="09XXXXXXXXX" required
                                     class="w-full bg-[#121316] border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-600 focus:outline-none focus:border-white transition font-mono">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Transaction Reference ID</label>
-                                <input type="text" name="reference_id" placeholder="13-Digit Ref No." required 
+                                <input type="text" name="reference_id" placeholder="13-Digit Ref No." required
                                     class="w-full bg-[#121316] border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-600 focus:outline-none focus:border-white transition font-mono">
                             </div>
                         </div>
@@ -110,23 +110,23 @@ if (!empty($_SESSION['cart'])) {
                     <div class="space-y-4">
                         <div>
                             <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Cardholder Name</label>
-                            <input type="text" name="card_name" required 
+                            <input type="text" name="card_name" required
                                 class="w-full bg-[#121316] border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-white transition">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Card Number</label>
-                            <input type="text" name="card_number" placeholder="•••• •••• •••• ••••" required 
+                            <input type="text" name="card_number" placeholder="•••• •••• •••• ••••" required
                                 class="w-full bg-[#121316] border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-600 focus:outline-none focus:border-white transition font-mono tracking-widest">
                         </div>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Expiry Date</label>
-                                <input type="text" name="card_expiry" placeholder="MM/YY" required 
+                                <input type="text" name="card_expiry" placeholder="MM/YY" required
                                     class="w-full bg-[#121316] border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-600 focus:outline-none focus:border-white transition font-mono">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-gray-400 uppercase mb-1">Security Code (CVV)</label>
-                                <input type="password" name="card_cvv" placeholder="•••" maxlength="4" required 
+                                <input type="password" name="card_cvv" placeholder="•••" maxlength="4" required
                                     class="w-full bg-[#121316] border border-gray-700 rounded-lg px-4 py-2.5 text-white placeholder-gray-600 focus:outline-none focus:border-white transition font-mono">
                             </div>
                         </div>
@@ -154,7 +154,7 @@ if (!empty($_SESSION['cart'])) {
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <a href="checkout.php" 
+                    <a href="checkout.php"
                         class="w-full bg-transparent border border-gray-700 font-bold text-[14px] uppercase tracking-wider py-3.5 rounded-lg text-gray-400 hover:text-white hover:border-white transition cursor-pointer flex items-center justify-center gap-2 group text-center order-2 sm:order-1">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 transform transition-transform duration-200 group-hover:-translate-x-1">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
@@ -162,7 +162,7 @@ if (!empty($_SESSION['cart'])) {
                         <span>Go Back</span>
                     </a>
 
-                    <button type="submit" 
+                    <button type="submit"
                         class="w-full bg-transparent border border-emerald-500 text-emerald-400 hover:bg-emerald-500 hover:text-[#121316] font-bold text-[14px] uppercase tracking-wider py-3.5 rounded-lg transition cursor-pointer flex items-center justify-center gap-2 group order-1 sm:order-2">
                         <span>Confirm Order</span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 transform transition-transform duration-200 group-hover:translate-x-1">

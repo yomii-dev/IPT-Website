@@ -20,7 +20,7 @@ $unhighlighted = 'bg-[#262930] text-gray-300 hover:bg-gray-700';
             <a href="/IPT-Website/templates/product.php"
                 class="<?= $page == 'Products' ? $highlighted : $unhighlighted ?>
                 font-medium px-4 py-1.5 rounded-lg text-xs">Products</a>
-            <?php if (isset($_SESSION['user_id']) && (int) $_SESSION['user_id'] === 1): ?>
+            <?php if (isset($_SESSION['User_Id']) && (int) $_SESSION['User_Id'] === 1): ?>
                 <a href="/IPT-Website/templates/admin.php"
                     class="<?= $page == 'Admin' ? $highlighted : $unhighlighted ?>
                     font-medium px-4 py-1.5 rounded-lg text-xs">Admin</a>
@@ -40,8 +40,8 @@ $unhighlighted = 'bg-[#262930] text-gray-300 hover:bg-gray-700';
         ?>
 
         <div class="flex items-center gap-4 text-xs font-medium text-gray-400">
-            <?php if (isset($_SESSION['user_name']) && $_SESSION['user_name'] !== ''): ?>
-                <span class="text-gray-200 text-sm mr-2"><?= htmlspecialchars($_SESSION['user_name']) ?></span>
+            <?php if (isset($_SESSION['Username']) && $_SESSION['Username'] !== ''): ?>
+            <span class="text-gray-200 text-sm mr-2"><?= htmlspecialchars($_SESSION['Username']) ?></span>
                 <a href="/IPT-Website/templates/logout.php" class="hover:text-white">Logout</a>
             <?php else: ?>
                 <a href="/IPT-Website/templates/login.php" class="text-white">Login</a>
