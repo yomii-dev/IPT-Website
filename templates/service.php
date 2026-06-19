@@ -67,7 +67,7 @@
                         <li>Local and Trusted Service</li>
                     </ul>
                     <button class="bg-gray-200 text-black font-bold text-[14px] px-6 py-2 rounded-lg hover:bg-white shadow-sm">
-                        Rent
+                        <a href="/IPT-Website/templates/rental.php">Rent</a>
                     </button>
                 </div>
             </div>
