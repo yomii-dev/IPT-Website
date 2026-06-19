@@ -404,7 +404,7 @@ $cart_items = $_SESSION['cart'];
                         <!--CHECKOUT BUTTON-->
                         <!--Chore: add functionality-->
                          <div class="pt-2 border-t border-gray-700/50">
-                            <form method="POST" action="product.php">
+                            <form method="POST" action="checkout.php">
                                 <button type="submit" name="checkout" class="w-full relative group overflow-hidden bg-transparent border-emerald-500
                                 text-emerald-400 font-mono font-bold py-2.5 px-4 rounded-lg text-center tracking-widest uppercase transition duration-300 cursor-pointer text-sm shadow-gray-500 hover:shadow-gray-700">
                                     <span class="absolute inset-0 w-full h-full bg-emerald-500 -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out -z-10"></span>
