@@ -46,7 +46,7 @@ if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart'])) {
 try {
     $conn = require_once '../includes/mysqli.inc.php';
 
-    $query = 'SELECT * FROM ProductsInfo WHERE 1=1';
+    $query = 'SELECT * FROM ProductsInfo WHERE OnSale = 1';
     $params = [];
     $types = '';
 
@@ -79,7 +79,7 @@ try {
     }
 
     if (empty($params)) {
-        $result = $conn->query('SELECT * FROM ProductsInfo');
+        $result = $conn->query($query);
     } else {
         $stmt = $conn->prepare($query);
         $bindParams = [$types];
