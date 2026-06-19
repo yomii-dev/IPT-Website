@@ -220,7 +220,7 @@ $productsResult = $conn->query('SELECT * FROM ProductsInfo ORDER BY Product_Id D
                             <th class="py-3 pr-4">Category</th>
                             <th class="py-3 pr-4">Price</th>
                             <th class="py-3 pr-4">Stock</th>
-                            <th class="py-3 pr-4">Sale</th>
+                            <th class="py-3 pr-4">On Sale</th>
                             <th class="py-3 pr-4">Image</th>
                             <th class="py-3 pr-4">Actions</th>
                         </tr>
