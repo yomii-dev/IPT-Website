@@ -12,7 +12,6 @@ $user = isset($_POST['Username']) ? trim($_POST['Username']) : '';
 $email = isset($_POST['Email']) ? trim($_POST['Email']) : '';
 $pass = isset($_POST['User_Pass']) ? $_POST['User_Pass'] : '';
 $hashedpassword = password_hash($pass, PASSWORD_DEFAULT);
-echo $hashedpassword;
 
 
 if ($firstName === '' || $lastName === '' || $user === '' || $email === '' || $pass === '') {
@@ -22,7 +21,7 @@ if ($firstName === '' || $lastName === '' || $user === '' || $email === '' || $p
 
 $conn = require_once $_SERVER['DOCUMENT_ROOT'] . '/IPT-Website/includes/mysqli.inc.php';
 
-$checkStmt = $conn->prepare('SELECT Id FROM UserAccounts WHERE Username = ? OR Email = ? LIMIT 1');
+$checkStmt = $conn->prepare('SELECT User_Id FROM UserAccounts WHERE Username = ? OR Email = ? LIMIT 1');
 $checkStmt->bind_param('ss', $user, $email);
 $checkStmt->execute();
 $checkResult = $checkStmt->get_result();
