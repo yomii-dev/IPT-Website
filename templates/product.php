@@ -158,6 +158,7 @@ $cart_items = $_SESSION['cart'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>P3R | Product</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="icon" type="image/svg+xml" href="../assets/website_icon.svg">
     <script>
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
