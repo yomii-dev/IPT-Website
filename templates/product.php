@@ -92,6 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = isset($_POST['name']) ? trim($_POST['name']) : '';
     $qty = isset($_POST['qty']) ? (int) $_POST['qty'] : 0;
     $price = isset($_POST['price']) ? (float) $_POST['price'] : 0.0;
+    $stock = isset($_POST['stock']) ? (float) $_POST['stock'] : 0.0;
 
     if ($qty > 0 && $name !== '') {
       $found = false;
@@ -101,6 +102,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           // update qty in-place using the key
           $_SESSION['cart'][$key]['qty'] =
             (int) $_SESSION['cart'][$key]['qty'] + $qty;
+          if ($_SESSION['cart'][$key]['qty'] > $stock) {
+            $_SESSION['cart'][$key]['qty'] = $stock;
+          }
           $found = true;
           break;
         }
@@ -111,6 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           'name' => $name,
           'price' => $price,
           'qty' => $qty,
+          'stock' => $stock
         ];
       }
     }
@@ -422,6 +427,7 @@ class="w-full bg-[#121316] text-white border border-gray-700 rounded p-1 text-ce
 <input type="hidden" name="id" value="<?= $id ?>">
 <input type="hidden" name="name" value="<?= $name ?>">
 <input type="hidden" name="price" value="<?= $price ?>">
+<input type="hidden" name="stock" value="<?= (int) $stock ?>">
 <input
 type="submit"
 name="cart"
