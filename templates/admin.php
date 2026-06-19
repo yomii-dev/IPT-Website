@@ -190,7 +190,7 @@ $productsResult = $conn->query('SELECT * FROM ProductsInfo ORDER BY Product_Id D
                         <input type="number" name="product_stock" min="0" step="1" value="<?php echo htmlspecialchars((string) ($editingProduct['InStock'] ?? '')); ?>" class="w-full rounded-lg bg-[#121316] border border-gray-700 px-3 py-2 text-sm">
                     </label>
 
-                    <label class="flex items-center gap-2">
+                    <label class="flex items-end gap-2 pb-3">
                         <input type="checkbox" name="on_sale" <?php echo !empty($editingProduct) && (int) $editingProduct['OnSale'] === 1 ? 'checked' : ''; ?>>
                         On sale
                     </label>
