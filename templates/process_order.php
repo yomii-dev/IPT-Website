@@ -5,8 +5,12 @@ $conn = require_once '../includes/mysqli.inc.php';
 date_default_timezone_set('Asia/Manila');
 
 // Ensure user and cart are active
-if (!isset($_SESSION['User_Id']) || empty($_SESSION['cart'])) {
-    header("Location: /IPT-Website/templates/product.php");
+if (!isset($_SESSION['User_Id'])) {
+   header("Location: /IPT-Website/templates/checkout-status.php?error=not_logged_in");
+  die();
+}
+if (empty($_SESSION['cart'])) {
+    header("Location: /IPT-Website/templates/checkout-status.php?error=empty_cart");
     die();
 }
 
@@ -53,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Clear runtime checkout cart state
         unset($_SESSION['cart']);
 
-        header("Location: /IPT-Website/templates/index.php?status=success");
+        header("Location: /IPT-Website/templates/checkout-status.php?status=success");
         die();
 
     } catch (Exception $e) {
