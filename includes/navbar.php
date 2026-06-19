@@ -20,6 +20,14 @@ $unhighlighted = 'bg-[#262930] text-gray-300 hover:bg-gray-700';
             <a href="/IPT-Website/templates/product.php"
                 class="<?= $page == 'Products' ? $highlighted : $unhighlighted ?>
                 font-medium px-4 py-1.5 rounded-lg text-xs">Products</a>
+            <?php if (isset($_SESSION['user_id']) && (int) $_SESSION['user_id'] === 1): ?>
+                <a href="/IPT-Website/templates/admin.php"
+                    class="<?= $page == 'Admin' ? $highlighted : $unhighlighted ?>
+                    font-medium px-4 py-1.5 rounded-lg text-xs">Admin</a>
+                <a href="/IPT-Website/templates/rental.php"
+                    class="<?= $page == 'Rental' ? $highlighted : $unhighlighted ?>
+                    font-medium px-4 py-1.5 rounded-lg text-xs">Rental</a>
+            <?php endif; ?>
             <a href="/IPT-Website/templates/service.php"
                 class="<?= $page == 'Service' ? $highlighted : $unhighlighted ?>
                 font-medium px-4 py-1.5 rounded-lg text-xs">Service</a>

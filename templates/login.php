@@ -30,6 +30,7 @@ switch ($errorcode) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>P3R | Login</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="icon" type="image/svg+xml" href="../assets/website_icon.svg">
 </head>
 
 <body class="bg-[#121316] text-white min-h-screen flex flex-col justify-between font-sans">
