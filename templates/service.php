@@ -70,79 +70,18 @@ $page = 'Service';
 
                     <h3 class="text-3xl font-black text-white">PC Renting</h3>
 
+                    <p class="text-gray-400 text-md">
+                        Experience the ultimate gaming performance with our top-tier PC rentals. Whether you're a competitive gamer, a content creator, or a professional in need of high-performance computing, our rental service has you covered. Choose from a range of powerful rigs equipped with the latest hardware to elevate your gaming experience without the commitment of ownership.
+                    </p>
+
                     <ul class="text-[16px] text-gray-400 space-y-1.5 list-disc list-inside">
                         <li>Wide Selection of High-Performance PCs</li>
                         <li>Flexible Rental Durations</li>
                         <li>Instant Deployment & Easy Setup</li>
-                        <li>Cost-Effective Alternative to Buying</li>
                         <li>Regular Maintenance & Support</li>
-                        <li>Upgrade Options Available</li>
                         <li>Local and Trusted Service</li>
                     </ul>
-                    <button class="bg-gray-200 text-black font-bold text-[14px] px-6 py-2 rounded-lg hover:bg-white shadow-sm">
-                        <a href="/IPT-Website/templates/rental.php">Rent</a>
-                    </button>
-                </div>
-            </div>
-
-        </div>
-
-
-
-        <div class="space-y-6">
-
-            <div class="bg-[#252A2E] rounded-xl p-6 flex flex-col flex-row gap-8 items-center">
-
-                <div class="w-full md:w-[320px] shrink-0 aspect-square rounded-xl overflow-hidden">
-                    <img src="/IPT-Website/assets/samplepic.jpg" alt="Dream PC Setup" class="w-full h-full object-cover">
-                </div>
-
-                <div class="flex-grow space-y-3 w-full pl-14">
-
-                    <h3 class="text-3xl font-black text-white">Disk Reformatting</h3>
-
-                    <ul class="text-[16px] text-gray-400 space-y-1.5 list-disc list-inside">
-                        <li>Securely erase data and restore storage devices to factory settings</li>
-                        <li>Free Diagnostic & Transparent Pricing</li>
-                        <li>High Success of Data Recovery Guarantee</li>
-                        <li>Privacy & Security First</li>
-                        <li>Support for All File Types & Systems </li>
-                        <li>Local and Trusted</li>
-                        <li>Prevention & Backup Device</li>
-                    </ul>
-                    <button class="bg-gray-200 text-black font-bold text-[14px] px-6 py-2 rounded-lg hover:bg-white shadow-sm">
-                        Rent
-                    </button>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="space-y-6">
-
-            <div class="bg-[#252A2E] rounded-xl p-6 flex flex-col flex-row gap-8 items-center">
-
-                <div class="w-full md:w-[320px] shrink-0 aspect-square rounded-xl overflow-hidden">
-                    <img src="/IPT-Website/assets/samplepic.jpg" alt="Dream PC Setup" class="w-full h-full object-cover">
-                </div>
-
-                <div class="flex-grow space-y-3 w-full pl-14">
-
-                    <h3 class="text-3xl font-black text-white">Data Recovery</h3>
-
-                    <ul class="text-[16px] text-gray-400 space-y-1.5 list-disc list-inside">
-                        <li>Fast, secure retrieval of lost files from HDDs, SSDs, USBs, memory cards, and RAID arrays</li>
-                        <li>Free Diagnostic & Transparent Pricing</li>
-                        <li>High Success of Data Recovery Guarantee</li>
-                        <li>Privacy & Security First</li>
-                        <li>Support for All File Types & Systems </li>
-                        <li>Local and Trusted</li>
-                        <li>Prevention & Backup Device</li>
-                    </ul>
-                    <button class="bg-gray-200 text-black font-bold text-[14px] px-6 py-2 rounded-lg hover:bg-white shadow-sm">
-                        Rent
-                    </button>
+                    
                 </div>
             </div>
 
