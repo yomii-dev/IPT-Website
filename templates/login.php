@@ -20,6 +20,7 @@ switch ($errorcode) {
     default:
         break;
 }
+$page = '';
 ?>
 <!DOCTYPE html>
 
@@ -36,26 +37,9 @@ switch ($errorcode) {
 <body class="bg-[#121316] text-white min-h-screen flex flex-col justify-between font-sans">
 
     <!--NAVBAR LAYOUT-->
-    <div class="p-4">
-        <nav class="bg-[#252A2E] rounded-xl px-6 py-3 flex items-center justify-between">
-
-            <div class="flex items-center">
-                <img src="/IPT-Website/assets/logo.svg" alt="P3R Logo" class="h-5">
-            </div>
-
-            <div class="flex items-center ml-13 gap-2">
-                <a href="#" class="bg-[#D9D9D9] text-black font-medium px-4 py-1.5 rounded-lg text-xs">Home</a>
-                <a href="#" class="bg-[#262930] text-gray-300 font-medium px-4 py-1.5 rounded-lg text-xs hover:bg-gray-700">Product</a>
-                <a href="#" class="bg-[#262930] text-gray-300 font-medium px-4 py-1.5 rounded-lg text-xs hover:bg-gray-700">Service</a>
-            </div>
-
-            <div class="flex items-center gap-4 text-xs font-medium text-gray-400">
-                <a href="login.php" class="text-white">Login</a>
-                <a href="signup.php" class="hover:text-white">Sign Up</a>
-            </div>
-
-        </nav>
-    </div>
+    <?php
+    require_once '../includes/navbar.php';
+    ?>
 
     <!--MAIN CONTAINER-->
 
